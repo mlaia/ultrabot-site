@@ -274,3 +274,8 @@ html[dir=rtl] input[type=email],html[dir=rtl] a[href^="mailto:"],html[dir=rtl] a
   .ub-wave i{animation:none}
   .ub-btn,.ub-card-link,.ub-faces video{transition:none}
 }
+
+/* he page: RTL fixes for /he/ (append-only; keep separate from other page blocks) */
+@media(max-width:960px){
+  html[dir=rtl] .ub-nav .ub-has-sub ul{padding:0 14px 0 0}
+}
