@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Insights | Ultrabot: Hebrew &amp; English voice agents</title>
+<meta name="description" content="Engineering notes on voice agents, AI agents and LLMs in production, by Dr. Yochai Edlitz and the MLAIA team that builds Ultrabot.">
+<link rel="canonical" href="https://ultrabot.ai/insights/">
+<meta property="og:site_name" content="Ultrabot">
+<meta property="og:title" content="Insights | Ultrabot: Hebrew &amp; English voice agents">
+<meta property="og:description" content="Engineering notes on voice agents, AI agents and LLMs in production, by Dr. Yochai Edlitz and the MLAIA team that builds Ultrabot.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ultrabot.ai/insights/">
+<meta property="og:image" content="https://ultrabot.ai/assets/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ultrabot.ai/assets/og/home.png">
+<meta name="theme-color" content="#0057ff">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ultrabot.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/ultrabot.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Insights", "description": "Engineering notes on voice agents, AI agents and LLMs in production, by Dr. Yochai Edlitz and the MLAIA team that builds Ultrabot.", "url": "https://ultrabot.ai/insights/", "isPartOf": {"@type": "WebSite", "name": "Ultrabot", "url": "https://ultrabot.ai/"}, "hasPart": [{"@type": "BlogPosting", "headline": "Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots", "url": "https://ultrabot.ai/insights/blog-rag-production/"}, {"@type": "BlogPosting", "headline": "Sovereign AI in Israel: Running LLMs On-Prem in Regulated Industries", "url": "https://ultrabot.ai/insights/blog-sovereign-ai-onprem/"}, {"@type": "BlogPosting", "headline": "LLMs in Production", "url": "https://ultrabot.ai/insights/llms-in-production/"}, {"@type": "BlogPosting", "headline": "Voice AI Grows Up: Engineering Production Speech Systems in 2026", "url": "https://ultrabot.ai/insights/blog-voice-ai-production/"}, {"@type": "BlogPosting", "headline": "The Agentic AI Production Gap: Why 89% of Enterprise Pilots Never Ship", "url": "https://ultrabot.ai/insights/agentic-ai-production-gap/"}, {"@type": "BlogPosting", "headline": "Why Israeli Enterprises Are Bringing AI On-Prem with Small Language Models", "url": "https://ultrabot.ai/insights/blog-slm-onprem-israel/"}, {"@type": "BlogPosting", "headline": "From Pilot to Production: Why 88% of AI Agent Projects Fail", "url": "https://ultrabot.ai/insights/blog-ai-agents-pilot-to-production/"}, {"@type": "BlogPosting", "headline": "Agentic AI in Production: A Practical Framework for Israeli Enterprises", "url": "https://ultrabot.ai/insights/blog-agents-production/"}, {"@type": "BlogPosting", "headline": "Harness Your Data's Potential with Large Language Models", "url": "https://ultrabot.ai/insights/blog-llms/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ultrabot", "item": "https://ultrabot.ai/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://ultrabot.ai/insights/"}]}</script>
+</head>
+<body>
+<a class="ub-skip" href="#main">Skip to main content</a>
+<header class="ub-header">
+  <div class="ub-wrap ub-header-inner">
+    <a class="ub-logo" href="/" aria-label="Ultrabot home">Ultra<span>bot</span></a>
+    <button class="ub-menu" type="button" aria-expanded="false" aria-controls="ub-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>
+    <nav class="ub-nav" id="ub-nav" aria-label="Main">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li class="ub-has-sub"><details><summary>Platforms</summary><ul>
+          <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+          <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+          <li><a href="/n8n-automation/">n8n automation</a></li>
+        </ul></details></li>
+        <li><a href="/insights/" aria-current="page">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a class="ub-nav-cta" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="ub-page-hero"><div class="ub-wrap"><nav class="ub-breadcrumb" aria-label="Breadcrumb"><a href="/">Ultrabot</a> / <span aria-current="page">Insights</span></nav><p class="ub-eyebrow">Insights</p><h1>Notes from production.</h1><p class="ub-intro">Engineering notes on voice agents, AI agents and LLMs in production, by Dr. Yochai Edlitz and the MLAIA team that builds Ultrabot.</p></div></section>
+<section class="ub-section"><div class="ub-wrap"><h2 class="ub-sr">All posts</h2><div class="ub-grid ub-reads">
+<a href="/insights/blog-rag-production/"><small>RAG · August 2026</small><strong>Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots</strong><span class="ub-read-desc">Why RAG pilots stall between demo and production, and a 90-day plan to ship.</span></a>
+<a href="/insights/blog-sovereign-ai-onprem/"><small>On-prem AI · August 2026</small><strong>Sovereign AI in Israel: Running LLMs On-Prem in Regulated Industries</strong><span class="ub-read-desc">Data residency rules, the capability trade-off and a reference architecture for on-prem LLMs.</span></a>
+<a href="/insights/llms-in-production/"><small>LLMs · Reference · July 2026</small><strong>LLMs in Production</strong><span class="ub-read-desc">Prompting vs RAG vs fine-tuning, layered evaluation, hallucinations, SLMs and cost.</span></a>
+<a href="/insights/blog-voice-ai-production/"><small>Voice AI · July 2026</small><strong>Voice AI Grows Up: Engineering Production Speech Systems in 2026</strong><span class="ub-read-desc">Cascaded vs speech-to-speech, the sub-500 ms latency budget, per-call costs and Hebrew.</span></a>
+<a href="/insights/agentic-ai-production-gap/"><small>AI agents · June 2026</small><strong>The Agentic AI Production Gap: Why 89% of Enterprise Pilots Never Ship</strong><span class="ub-read-desc">Five root causes that kill agentic pilots, and what the teams that ship do differently.</span></a>
+<a href="/insights/blog-slm-onprem-israel/"><small>On-prem AI · June 2026</small><strong>Why Israeli Enterprises Are Bringing AI On-Prem with Small Language Models</strong><span class="ub-read-desc">The economics, privacy gains and production playbook for small language models.</span></a>
+<a href="/insights/blog-ai-agents-pilot-to-production/"><small>AI agents · May 2026</small><strong>From Pilot to Production: Why 88% of AI Agent Projects Fail</strong><span class="ub-read-desc">Integration, non-determinism, scope and governance: five principles for production agents.</span></a>
+<a href="/insights/blog-agents-production/"><small>AI agents · April 2026</small><strong>Agentic AI in Production: A Practical Framework for Israeli Enterprises</strong><span class="ub-read-desc">Scope design, tools and memory, human-in-the-loop patterns and observability.</span></a>
+<a href="/insights/blog-llms/"><small>LLMs · September 2023</small><strong>Harness Your Data's Potential with Large Language Models</strong><span class="ub-read-desc">Fine-tuning and RAG for customer support, sales and business intelligence.</span></a>
+</div></div></section>
+<section class="ub-contact" id="contact" aria-labelledby="contact-h">
+  <div class="ub-wrap ub-contact-grid">
+    <div>
+      <p class="ub-eyebrow">Talk to a person</p>
+      <h2 id="contact-h">Tell us what<br>you’re working on.</h2>
+      <p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p>
+      <p>Please don’t include confidential datasets, credentials or patient information.</p>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>
+    </div>
+    <form class="ub-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="source" value="ultrabot.ai">
+      <input type="hidden" name="topic" value="insights">
+      <input type="hidden" name="_subject" value="Ultrabot inquiry (insights)">
+      <div class="ub-form-row">
+        <label for="cf-name">Name<input id="cf-name" name="name" autocomplete="name" required></label>
+        <label for="cf-company">Company<input id="cf-company" name="company" autocomplete="organization"></label>
+      </div>
+      <label for="cf-email">Work email<input id="cf-email" type="email" name="email" autocomplete="email" required></label>
+      <label for="cf-message">What would you like your agent to do?<textarea id="cf-message" name="message" required></textarea></label>
+      <p class="ub-form-small">Your message goes to MLAIA Data Science, who build Ultrabot, and is handled under the <a href="https://www.mlaia.com/privacy.html">MLAIA Privacy Policy</a>.</p>
+      <button type="submit" class="ub-btn">Send message <span aria-hidden="true">→</span></button>
+      <p class="ub-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="ub-footer">
+  <div class="ub-wrap ub-footer-inner">
+    <div>
+      <a class="ub-logo" href="/">Ultra<span>bot</span></a>
+      <p>Hebrew &amp; English AI voice agents with a face.</p>
+      <p class="ub-built">Built by <a href="https://www.mlaia.com/audio-ai/">MLAIA Data Science</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+        <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+        <li><a href="/n8n-automation/">n8n automation</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span><span class="ub-sr"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
+      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="https://www.mlaia.com/accessibility.html">Accessibility</a></p>
+      <p>© 2026 MLAIA Data Science · Israel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

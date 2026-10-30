@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agentic AI in Production: A Practical Framework for Israeli Enterprises | Ultrabot</title>
+<meta name="description" content="Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool &amp; memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.">
+<meta name="author" content="Dr. Yochai Edlitz">
+<link rel="canonical" href="https://ultrabot.ai/insights/blog-agents-production/">
+<meta property="og:site_name" content="Ultrabot">
+<meta property="og:title" content="Agentic AI in Production: A Practical Framework for Israeli Enterprises | Ultrabot">
+<meta property="og:description" content="Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool &amp; memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ultrabot.ai/insights/blog-agents-production/">
+<meta property="og:image" content="https://ultrabot.ai/assets/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-04-12">
+<meta property="article:author" content="Dr. Yochai Edlitz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ultrabot.ai/assets/og/home.png">
+<meta name="theme-color" content="#0057ff">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ultrabot.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/ultrabot.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Agentic AI in Production: A Practical Framework for Israeli Enterprises", "description": "Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool & memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.", "image": "https://ultrabot.ai/assets/og/home.png", "datePublished": "2026-04-12", "dateModified": "2026-04-12", "author": {"@type": "Person", "name": "Dr. Yochai Edlitz", "url": "https://www.mlaia.com/#about", "jobTitle": "Founder & CEO, MLAIA"}, "publisher": {"@type": "Organization", "name": "Ultrabot, built by MLAIA Data Science", "url": "https://ultrabot.ai/"}, "url": "https://ultrabot.ai/insights/blog-agents-production/", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ultrabot.ai/insights/blog-agents-production/"}, "inLanguage": "en", "keywords": "agentic AI Israel, AI agents production, enterprise AI agents, LLM agents, human-in-the-loop, AI observability, Hebrew NLP, data residency Israel"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ultrabot", "item": "https://ultrabot.ai/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://ultrabot.ai/insights/"}, {"@type": "ListItem", "position": 3, "name": "Agentic AI in production", "item": "https://ultrabot.ai/insights/blog-agents-production/"}]}</script>
+</head>
+<body>
+<a class="ub-skip" href="#main">Skip to main content</a>
+<header class="ub-header">
+  <div class="ub-wrap ub-header-inner">
+    <a class="ub-logo" href="/" aria-label="Ultrabot home">Ultra<span>bot</span></a>
+    <button class="ub-menu" type="button" aria-expanded="false" aria-controls="ub-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>
+    <nav class="ub-nav" id="ub-nav" aria-label="Main">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li class="ub-has-sub"><details><summary>Platforms</summary><ul>
+          <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+          <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+          <li><a href="/n8n-automation/">n8n automation</a></li>
+        </ul></details></li>
+        <li><a href="/insights/" aria-current="page">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a class="ub-nav-cta" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<article class="ub-article">
+<nav class="ub-breadcrumb" aria-label="Breadcrumb"><a href="/">Ultrabot</a> / <a href="/insights/">Insights</a> / <span aria-current="page">Agentic AI in production</span></nav>
+<h1>Agentic AI in Production: A Practical Framework for Israeli Enterprises</h1>
+<p class="ub-meta"><time datetime="2026-04-12">April 2026</time> · 8 min read · Enterprise AI · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+<figure class="ub-figure ub-figure-art">
+<svg viewBox="0 0 780 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agentic AI loop diagram: Plan, Act, Observe, Reflect">
+<rect width="780" height="260" fill="#0d1117"/>
+<!-- Grid -->
+<path d="M0 65h780M0 130h780M0 195h780" stroke="rgba(0,87,255,0.04)" stroke-width="1"/>
+<path d="M195 0v260M390 0v260M585 0v260" stroke="rgba(0,87,255,0.04)" stroke-width="1"/>
+<!-- Title -->
+<text x="390" y="26" font-family="monospace" font-size="10" fill="rgba(245,158,11,0.7)" letter-spacing="2" text-anchor="middle">THE AGENTIC LOOP  ·  PLAN → ACT → OBSERVE → REFLECT</text>
+
+<!-- Center circle (LLM core) -->
+<circle cx="390" cy="138" r="38" fill="rgba(0,87,255,0.12)" stroke="rgba(0,87,255,0.55)" stroke-width="1.5"/>
+<text x="390" y="134" font-family="monospace" font-size="9" fill="rgba(0,180,216,0.9)" text-anchor="middle">LLM</text>
+<text x="390" y="148" font-family="monospace" font-size="9" fill="rgba(0,180,216,0.7)" text-anchor="middle">CORE</text>
+
+<!-- PLAN node (top) -->
+<rect x="314" y="44" width="152" height="44" rx="8" fill="rgba(245,158,11,0.12)" stroke="rgba(245,158,11,0.6)" stroke-width="1.5"/>
+<text x="390" y="62" font-family="monospace" font-size="11" fill="rgba(245,158,11,1)" text-anchor="middle" font-weight="bold">PLAN</text>
+<text x="390" y="78" font-family="monospace" font-size="8" fill="rgba(245,158,11,0.6)" text-anchor="middle">Goal decomposition &amp; tool selection</text>
+
+<!-- ACT node (right) -->
+<rect x="572" y="115" width="152" height="44" rx="8" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.6)" stroke-width="1.5"/>
+<text x="648" y="133" font-family="monospace" font-size="11" fill="rgba(16,185,129,1)" text-anchor="middle" font-weight="bold">ACT</text>
+<text x="648" y="149" font-family="monospace" font-size="8" fill="rgba(16,185,129,0.6)" text-anchor="middle">Tool calls &amp; external actions</text>
+
+<!-- OBSERVE node (bottom) -->
+<rect x="314" y="196" width="152" height="44" rx="8" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.6)" stroke-width="1.5"/>
+<text x="390" y="214" font-family="monospace" font-size="11" fill="rgba(0,180,216,1)" text-anchor="middle" font-weight="bold">OBSERVE</text>
+<text x="390" y="230" font-family="monospace" font-size="8" fill="rgba(0,180,216,0.6)" text-anchor="middle">Environment feedback &amp; results</text>
+
+<!-- REFLECT node (left) -->
+<rect x="56" y="115" width="152" height="44" rx="8" fill="rgba(168,85,247,0.12)" stroke="rgba(168,85,247,0.6)" stroke-width="1.5"/>
+<text x="132" y="133" font-family="monospace" font-size="11" fill="rgba(168,85,247,1)" text-anchor="middle" font-weight="bold">REFLECT</text>
+<text x="132" y="149" font-family="monospace" font-size="8" fill="rgba(168,85,247,0.6)" text-anchor="middle">Memory update &amp; re-planning</text>
+
+<!-- Arrows: PLAN → ACT (top right arc) -->
+<path d="M466 66 Q540 66 572 130" stroke="rgba(245,158,11,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+<polygon points="569,123 578,133 562,132" fill="rgba(245,158,11,0.7)"/>
+
+<!-- Arrows: ACT → OBSERVE (right bottom arc) -->
+<path d="M648 159 Q648 196 466 210" stroke="rgba(16,185,129,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+<polygon points="473,207 463,214 462,200" fill="rgba(16,185,129,0.7)"/>
+
+<!-- Arrows: OBSERVE → REFLECT (bottom left arc) -->
+<path d="M314 218 Q240 218 208 155" stroke="rgba(0,180,216,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+<polygon points="211,162 205,151 218,152" fill="rgba(0,180,216,0.7)"/>
+
+<!-- Arrows: REFLECT → PLAN (left top arc) -->
+<path d="M132 115 Q132 66 314 66" stroke="rgba(168,85,247,0.5)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+<polygon points="307,63 317,68 308,74" fill="rgba(168,85,247,0.7)"/>
+
+<!-- Human-in-the-loop indicator -->
+<circle cx="390" cy="138" r="60" stroke="rgba(245,158,11,0.15)" stroke-width="1" fill="none" stroke-dasharray="3,4"/>
+<text x="453" y="96" font-family="monospace" font-size="7" fill="rgba(245,158,11,0.45)" text-anchor="middle">HITL</text>
+<text x="453" y="105" font-family="monospace" font-size="7" fill="rgba(245,158,11,0.35)" text-anchor="middle">checkpoint</text>
+
+<!-- Footer label -->
+<text x="390" y="252" font-family="monospace" font-size="9" fill="rgba(245,158,11,0.35)" text-anchor="middle" letter-spacing="2">AGENTIC AI ARCHITECTURE  ·  MLAIA FRAMEWORK  ·  2026</text>
+</svg>
+</figure>
+
+<p>The promise of agentic AI is compelling: software systems that don't just respond to queries but autonomously plan, execute multi-step tasks, call tools, and adapt in real time. In 2025 and 2026, barely a week passed without a major vendor announcing a new "agent" capability. And yet, for most enterprises, the gap between demo and deployment remains vast.</p>
+
+<p>Industry analysts estimate that roughly <strong>74% of enterprise AI pilot projects fail to reach sustained production</strong> — a figure that applies with particular force to agentic systems, which are inherently more complex than single-inference models. <em>(Industry estimate based on Gartner research; figures are approximate.)</em> The reasons for this failure rate are well-understood in retrospect but rarely anticipated in advance: scope creep, tool reliability, unpredictable failure modes, inadequate observability, and — especially in regulated Israeli industries — compliance blind spots.</p>
+
+<p>This article presents a practical framework for taking agentic AI from pilot to production, with specific attention to the constraints and opportunities that define the Israeli enterprise context. We will cover the four production pillars that determine whether an agent deployment succeeds, the Israeli-specific considerations that most vendors overlook, and what to look for in a partner who can navigate all of it.</p>
+
+<div class="ub-stat-callout"><strong>~74%</strong><p>Estimated share of enterprise AI agent pilots that fail to reach sustained production — most stall at integration, compliance, or monitoring gaps.<small>Industry estimate based on Gartner research, 2025</small></p></div>
+
+<h2>Why Agents Are Different</h2>
+
+<p>A traditional ML model is a function: it takes an input and returns an output. Evaluation is tractable because you can measure accuracy against a labeled test set. Deployment is bounded because the model's action surface is fixed.</p>
+
+<p>An agent is a system. It reasons about goals, selects from a dynamic set of tools, accumulates and retrieves memory across turns, and takes actions in the world — actions that may be irreversible. This changes the engineering problem fundamentally. You are no longer just optimizing a model; you are building and operating a distributed system whose behavior emerges from the interaction of a language model, a tool ecosystem, a memory layer, and the external environment it acts on.</p>
+
+<p>The implications for production engineering are profound. Where a model deployment might fail by returning a wrong answer, an agent deployment can fail by sending an incorrect email, committing a bad database write, or entering an infinite loop of tool calls. The blast radius of failure is qualitatively larger — which is why the production pillars below exist.</p>
+
+<blockquote>
+<p>Deploying an agent is not like deploying a model. It is like deploying a junior employee with access to your systems. You need the same things you'd need from that person: clear scope, reliable tools, escalation paths, and visibility into what they are doing at every step.</p>
+</blockquote>
+
+<h2>The Four Production Pillars</h2>
+
+<h3>Pillar 1: Scope Design</h3>
+
+<p>The most common cause of agent failure is not a technical one — it is a product design failure. Teams build agents with underspecified scope, and the agent encounters situations outside its design envelope with no defined behavior. In production, undefined behavior defaults to whatever the underlying model considers plausible, which is rarely what the business intended.</p>
+
+<p>Rigorous scope design means defining:</p>
+<ul>
+<li><strong>Task boundaries:</strong> A precise enumeration of what the agent is authorized to do, and equally important, what it is not. "Customer support agent" is not a scope; "answer billing questions for SaaS accounts up to tier 3, escalate anything requiring a refund above ₪500 or touching account security" is.</li>
+<li><strong>Failure modes and escalation paths:</strong> What happens when the agent encounters a situation outside its scope? The answer must be deterministic: escalate to a human, log and return a safe default, or refuse gracefully. Leaving this implicit is a production incident waiting to happen.</li>
+<li><strong>Persona and communication constraints:</strong> For customer-facing agents, what tone, language, and commitments are permitted? In a bilingual Hebrew/English environment, which language does the agent default to, and how does it handle mid-conversation language switches?</li>
+<li><strong>Authorization model:</strong> Which systems can the agent read from? Which can it write to? Which require a human approval step? This is not just a security concern — it is the foundation of the trust model that users and regulators will eventually audit.</li>
+</ul>
+
+<p>Scope design should produce a written specification before any model prompt is written. It is the contract between the business and the engineering team, and it is the document you will return to when something goes wrong.</p>
+
+<h3>Pillar 2: Tool &amp; Memory Architecture</h3>
+
+<p>An agent without tools is just a chatbot. An agent with poorly designed tools is an unpredictable system. The tool layer — the set of APIs, database queries, code executors, and external services the agent can invoke — is where most production problems originate.</p>
+
+<p>Well-engineered tool layers share several characteristics:</p>
+<ul>
+<li><strong>Idempotency by default:</strong> Tools that can be safely retried without side effects dramatically simplify error recovery. Where idempotency is not possible (sending an email, executing a payment), tools must have explicit guard rails: confirmation steps, deduplication keys, or human-in-the-loop checkpoints.</li>
+<li><strong>Typed, schema-validated inputs and outputs:</strong> The language model cannot be trusted to infer the correct parameter format from ambiguous documentation. Every tool should have a machine-readable schema (JSON Schema, Pydantic, or equivalent) that is enforced at call time, not just at definition time.</li>
+<li><strong>Graceful failure with structured errors:</strong> When a tool fails, the agent needs actionable information: not just "error 500" but "the CRM API returned a rate limit error; retry after 30 seconds." Structured error returns allow the agent to reason about recovery rather than hallucinating an alternative.</li>
+<li><strong>Cost and latency budgets:</strong> Agents can enter loops. A poorly designed orchestration can trigger hundreds of tool calls per user request. Tool wrappers should enforce per-request and per-session call limits, with hard stops that surface to the observability layer.</li>
+</ul>
+
+<p>Memory architecture is the other half of this pillar. Agents need access to context that exceeds the model's native context window, and they need to retrieve it efficiently. The practical choice is usually a combination of short-term conversation buffer (in-context), mid-term episodic memory (vector retrieval over recent session history), and long-term structured memory (database lookups for user preferences, account state, or domain knowledge). Each layer has different freshness, latency, and consistency characteristics — getting the architecture right requires understanding the specific retrieval patterns of your use case. Our <a href="/insights/blog-llms/">deep dive on large language models and retrieval</a> covers the underlying mechanisms in detail.</p>
+
+<h3>Pillar 3: Human-in-the-Loop Patterns</h3>
+
+<p>Full autonomy is rarely the right production target for a first-generation enterprise agent. The appropriate level of human oversight is not a binary choice but a spectrum, and the right point on that spectrum depends on the action's reversibility, cost, and regulatory context.</p>
+
+<div class="ub-stat-callout"><strong>3×</strong><p>Higher user trust scores observed for enterprise AI agents with explicit human-approval checkpoints versus fully autonomous deployments in the same task category.<small>Industry estimate based on Forrester Research, 2025</small></p></div>
+
+<p>Three human-in-the-loop (HITL) patterns are most commonly used in production:</p>
+<ul>
+<li><strong>Approval gates:</strong> The agent pauses before a defined class of high-stakes actions and requests explicit human confirmation. Used for irreversible actions (file deletion, external communications), high-value transactions, or first-time operations on a new entity. The key design requirement is that the approval interface shows the human exactly what the agent is about to do in plain language — not just a JSON payload.</li>
+<li><strong>Shadow mode:</strong> The agent runs in parallel with the existing human workflow, producing its recommended actions without executing them. Humans review the recommendations and execute approved ones manually. This pattern is ideal for the first 30–90 days of a deployment: it builds trust, surfaces edge cases, and generates labeled data for future autonomous operation — without any production risk.</li>
+<li><strong>Confidence-gated autonomy:</strong> The agent operates autonomously when its internal confidence score (or the absence of certain risk flags) exceeds a threshold, and escalates to a human below it. This requires a well-calibrated confidence signal — which is harder to build than it sounds, particularly for LLM-based agents where expressed confidence does not reliably track actual accuracy.</li>
+</ul>
+
+<blockquote>
+<p>The goal is not to minimize human involvement — it is to minimize unnecessary human involvement. An agent that escalates appropriately is more valuable than one that escalates never and fails occasionally in ways you cannot predict or audit. Calibrating that boundary is the real engineering challenge.</p>
+</blockquote>
+
+<h3>Pillar 4: Observability</h3>
+
+<p>You cannot improve what you cannot see. For a standard ML model, observability means monitoring prediction distributions, latency, and downstream business metrics. For an agent, it means all of that plus a complete, queryable record of every reasoning step, every tool call, every memory retrieval, and every human intervention.</p>
+
+<p>Production agent observability requires:</p>
+<ul>
+<li><strong>Trace logging:</strong> Every agent execution should produce a structured trace — a hierarchical record of the planning steps, tool invocations, memory operations, and model calls that comprised the run. Traces are the debugging primitive for agents in the same way logs are for traditional software.</li>
+<li><strong>Metric instrumentation:</strong> Task completion rate, tool error rate, human escalation rate, latency per step, and cost per task. These metrics should be broken down by task type, user segment, and time — not aggregated into a single dashboard number that masks the behavior of long-tail cases.</li>
+<li><strong>Drift and regression detection:</strong> Agent behavior can shift when the underlying model is updated by the provider, when tool APIs change, or when the distribution of user requests drifts. Automated regression tests on a canonical set of task scenarios — run on every deployment — are not optional.</li>
+<li><strong>Audit trails for regulated industries:</strong> In finance, healthcare, and other regulated sectors, you need to be able to answer "what did the agent do, why, and who authorized it?" for any action taken up to several years prior. This requires immutable, tamper-evident logging — not just application logs that can be overwritten.</li>
+</ul>
+
+<p>The observability layer is also the foundation of the continuous improvement loop. As you accumulate agent traces, you can identify systematic failure modes, improve tool schemas, refine scope boundaries, and eventually — with appropriate evaluation — expand the agent's autonomous action surface. Observability is not a compliance checkbox; it is the mechanism by which an agent deployment gets better over time. This connects directly to the signal processing principles we discussed in our <a href="https://www.mlaia.com/blog-signal.html">article on production data pipelines</a>.</p>
+
+<h2>Israeli-Specific Considerations</h2>
+
+<p>Enterprise AI deployment is never context-free, and Israel's specific regulatory, linguistic, and talent environment creates constraints that generic frameworks miss. Understanding these is not peripheral — they determine whether a deployment is legally permissible, technically sound, and actually usable by the people who interact with it.</p>
+
+<div class="ub-stat-callout"><strong>~60%</strong><p>Estimated share of mid-to-large Israeli enterprises citing data residency requirements as a primary constraint on their AI deployment architecture choices.<small>IDC Israel estimate, enterprise survey, 2025</small></p></div>
+
+<h3>Data Residency and Sovereignty</h3>
+
+<p>Many Israeli enterprises operate under data residency requirements that prohibit sending certain data categories to servers outside Israel or outside specific jurisdictions. This creates an architectural constraint that affects every layer of an agent deployment: the model inference endpoint, the memory and retrieval layer, the tool API calls, and the audit logging infrastructure.</p>
+
+<p>The practical implications are significant. If your agent processes health records, financial data, or defense-adjacent information, you may not be able to use a US-hosted LLM API endpoint — even for non-identifying intermediate reasoning. You need either a locally-deployed model (open-weight models such as Llama or Mistral variants are the current standard), a European-hosted API endpoint with appropriate data processing agreements, or a hybrid architecture where sensitive data stays on-premise and only sanitized context crosses the boundary. Each option carries different capability trade-offs and operational complexity costs that must be scoped early, not discovered at deployment.</p>
+
+<h3>Hebrew/English Multilingualism</h3>
+
+<p>Israeli enterprises operate in a bilingual environment that is more complex than it appears. It is not simply a matter of translating an English interface into Hebrew. Users switch languages mid-conversation, domain terminology is often English even in Hebrew-primary contexts, and the right-to-left rendering of Hebrew introduces layout challenges in any agent interface that surfaces text to users.</p>
+
+<p>At the model level, Hebrew language capability varies significantly across frontier models. As of early 2026, the leading English-first models show measurable degradation in Hebrew reasoning tasks relative to English-equivalent tasks — a gap that widens for domain-specific vocabulary (legal Hebrew, medical terminology, financial regulations in Hebrew). Testing your agent's task performance in Hebrew — not just its fluency — is a required part of the evaluation methodology, not a nice-to-have. The linguistic challenges of multilingual model deployment are a topic we examine through a different lens in our <a href="/insights/blog-llms/">article on working with large language models in production</a>.</p>
+
+<h3>Talent and Operational Realities</h3>
+
+<p>Israel has a world-class pool of AI research talent, but the specific operational skill set required for agentic AI in production — LLM orchestration, RAG pipeline engineering, agent evaluation methodology — is genuinely scarce even here. As we noted in our <a href="https://www.mlaia.com/blog-israel-ai-2026.html">2026 overview of the Israeli AI landscape</a>, there are an estimated 4,200 unfilled AI and data science roles in the country, and the production engineering subset is harder to fill than the research subset.</p>
+
+<p>This creates a practical consideration for how agent projects are staffed. Building a full in-house capability for agentic AI typically requires 12–18 months of hiring and onboarding, during which the market is moving rapidly. The risk of hiring into a pattern that becomes outdated is real. Many Israeli enterprises are finding that a hybrid model — a small in-house team responsible for product ownership and domain knowledge, augmented by specialized consulting for the engineering and evaluation architecture — delivers faster time to value and more defensible technical decisions than attempting to build everything internally.</p>
+
+<h2>What to Look for in an Agentic AI Partner</h2>
+
+<p>The market for AI consulting has expanded rapidly, and the term "agentic AI" now appears on almost every vendor's website. The following criteria distinguish teams with genuine production experience from those with pattern-matched vocabulary:</p>
+
+<ol>
+<li><strong>They start with evaluation, not architecture.</strong> A credible partner's first question is "how will we know if this agent is working?" — not "which framework should we use?" Evaluation methodology (task completion metrics, safety benchmarks, regression suites) is the hardest part of agentic AI and the part most often skipped by teams under delivery pressure.</li>
+<li><strong>They have experience with HITL design specifically.</strong> Designing approval interfaces, escalation flows, and confidence-gated autonomy requires understanding both the technical system and the human workflow it is embedded in. Ask for examples of how they have designed and iterated on the human-in-the-loop components of past deployments.</li>
+<li><strong>They can articulate their observability stack.</strong> Which tracing tools do they use? How do they instrument tool calls? What does a post-incident analysis look like for an agent deployment? Vague answers here indicate a team that has built demos but not maintained production systems.</li>
+<li><strong>They understand Israeli regulatory and linguistic constraints.</strong> Ask directly: have they deployed agents that process data under Israeli data residency requirements? Have they evaluated model performance in Hebrew for your specific task domain? These are not general AI questions; they require specific experience.</li>
+<li><strong>They plan for knowledge transfer.</strong> The goal of a consulting engagement should be to leave your team more capable, not more dependent. What does the handoff look like? What documentation, tooling, and training do they provide so that your engineers can maintain and extend the agent independently?</li>
+</ol>
+
+<blockquote>
+<p>The difference between a demo agent and a production agent is the same as the difference between a proof of concept and a product. One is optimized for the best case; the other is optimized for the full distribution of inputs, including the ones you did not anticipate when you built it. That is a fundamentally different engineering problem.</p>
+</blockquote>
+
+<aside class="ub-related" aria-label="Related topics"><p class="ub-related-title">Related topics</p><p>How we apply these pillars: <a href="/langgraph-agents/">LangGraph agents</a> with approval steps, <a href="/aws-bedrock-agents/">AI agents on AWS</a> with least-privilege tools, and <a href="/voice-agents/">voice agents</a>. Overview: <a href="/">Ultrabot, Hebrew &amp; English voice agents</a>.</p></aside>
+<h2>Conclusion</h2>
+
+<p>Agentic AI represents a genuine step-change in what software systems can accomplish — but only when deployed with the rigor the technology demands. The production gap is real, and the majority of enterprises that attempt agent deployments without systematic attention to scope design, tool architecture, human-in-the-loop patterns, and observability will contribute to that ~74% failure statistic.</p>
+
+<p>For Israeli enterprises specifically, the path to production runs through additional constraints: data residency architecture, Hebrew language evaluation, and a talent market where the specific skills needed are even scarcer than the general AI market already suggests. These are solvable problems — but they require partners with the right experience, not just the right vocabulary.</p>
+
+<p>At MLAIA, the team behind Ultrabot, we have built and operated agentic AI systems across Israeli industry — from financial compliance workflows to enterprise knowledge retrieval to customer-facing multilingual support agents. If you are working through an agent deployment challenge, or trying to move a pilot to production, we would be glad to compare notes. <a href="#contact">Reach out to the team.</a></p>
+
+<aside class="ub-cta" aria-label="Talk to us">
+  <h2>Ready to move your AI agent from pilot to production?</h2>
+  <p>MLAIA specializes in agentic AI deployment for Israeli enterprises — from scope design through observability, with deep experience in data residency, Hebrew/English multilingualism, and regulated industries.</p>
+  <p><a class="ub-btn" href="#contact">Talk to the team <span aria-hidden="true">→</span></a></p>
+</aside>
+</article>
+<section class="ub-contact" id="contact" aria-labelledby="contact-h">
+  <div class="ub-wrap ub-contact-grid">
+    <div>
+      <p class="ub-eyebrow">Talk to a person</p>
+      <h2 id="contact-h">Tell us what<br>you’re working on.</h2>
+      <p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p>
+      <p>Please don’t include confidential datasets, credentials or patient information.</p>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>
+    </div>
+    <form class="ub-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="source" value="ultrabot.ai">
+      <input type="hidden" name="topic" value="blog-agents-production">
+      <input type="hidden" name="_subject" value="Ultrabot inquiry (blog-agents-production)">
+      <div class="ub-form-row">
+        <label for="cf-name">Name<input id="cf-name" name="name" autocomplete="name" required></label>
+        <label for="cf-company">Company<input id="cf-company" name="company" autocomplete="organization"></label>
+      </div>
+      <label for="cf-email">Work email<input id="cf-email" type="email" name="email" autocomplete="email" required></label>
+      <label for="cf-message">What would you like your agent to do?<textarea id="cf-message" name="message" required></textarea></label>
+      <p class="ub-form-small">Your message goes to MLAIA Data Science, who build Ultrabot, and is handled under the <a href="https://www.mlaia.com/privacy.html">MLAIA Privacy Policy</a>.</p>
+      <button type="submit" class="ub-btn">Send message <span aria-hidden="true">→</span></button>
+      <p class="ub-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="ub-footer">
+  <div class="ub-wrap ub-footer-inner">
+    <div>
+      <a class="ub-logo" href="/">Ultra<span>bot</span></a>
+      <p>Hebrew &amp; English AI voice agents with a face.</p>
+      <p class="ub-built">Built by <a href="https://www.mlaia.com/audio-ai/">MLAIA Data Science</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+        <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+        <li><a href="/n8n-automation/">n8n automation</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span><span class="ub-sr"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
+      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="https://www.mlaia.com/accessibility.html">Accessibility</a></p>
+      <p>© 2026 MLAIA Data Science · Israel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
