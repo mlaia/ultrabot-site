@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LLMs in Production | Ultrabot</title>
+<meta name="description" content="Reference guide to running LLMs in production: prompting vs RAG vs fine-tuning, layered evaluation, hallucination mitigation, on-prem and small-language-model deployment, and cost/latency engineering.">
+<meta name="author" content="Dr. Yochai Edlitz">
+<link rel="canonical" href="https://ultrabot.ai/insights/llms-in-production/">
+<meta property="og:site_name" content="Ultrabot">
+<meta property="og:title" content="LLMs in Production | Ultrabot">
+<meta property="og:description" content="Reference guide to running LLMs in production: prompting vs RAG vs fine-tuning, layered evaluation, hallucination mitigation, on-prem and small-language-model deployment, and cost/latency engineering.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ultrabot.ai/insights/llms-in-production/">
+<meta property="og:image" content="https://ultrabot.ai/assets/og/home.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-07-13">
+<meta property="article:author" content="Dr. Yochai Edlitz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ultrabot.ai/assets/og/home.png">
+<meta name="theme-color" content="#0057ff">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ultrabot.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/ultrabot.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "LLMs in Production", "description": "Reference guide to running LLMs in production: prompting vs RAG vs fine-tuning, layered evaluation, hallucination mitigation, on-prem and small-language-model deployment, and cost/latency engineering.", "image": "https://ultrabot.ai/assets/og/home.png", "datePublished": "2026-07-13", "dateModified": "2026-07-13", "author": {"@type": "Person", "name": "Dr. Yochai Edlitz", "url": "https://www.mlaia.com/#about", "jobTitle": "Founder & CEO, MLAIA"}, "publisher": {"@type": "Organization", "name": "Ultrabot, built by MLAIA Data Science", "url": "https://ultrabot.ai/"}, "url": "https://ultrabot.ai/insights/llms-in-production/", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ultrabot.ai/insights/llms-in-production/"}, "inLanguage": "en", "keywords": "LLMs in production, RAG, fine-tuning, LLM evaluation, hallucination, small language models, on-prem LLM"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ultrabot", "item": "https://ultrabot.ai/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://ultrabot.ai/insights/"}, {"@type": "ListItem", "position": 3, "name": "LLMs in production", "item": "https://ultrabot.ai/insights/llms-in-production/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When should I fine-tune instead of using RAG?", "acceptedAnswer": {"@type": "Answer", "text": "Fine-tune when the model's form is wrong — style, format, domain phrasing, or reliability on a narrow task — or when you need a smaller model to hit cost and latency targets. Use RAG when the model's knowledge is wrong or stale. Fine-tuning does not reliably add facts, and RAG does not fix formatting or style."}}, {"@type": "Question", "name": "Can LLM hallucinations be eliminated?", "acceptedAnswer": {"@type": "Answer", "text": "No. They can be reduced substantially through grounding with citations, abstention, verifier passes, and constrained tasks, and their rate can be measured and monitored. Production system design should assume a nonzero hallucination rate and route consequential outputs through verification or human review."}}, {"@type": "Question", "name": "Are small language models good enough for production?", "acceptedAnswer": {"@type": "Answer", "text": "Often, for narrow tasks: classification, extraction, summarization, and domain-specific question answering after fine-tuning. They lag frontier models on open-ended reasoning, which is why many production systems route between a local small model and a frontier API depending on request difficulty."}}, {"@type": "Question", "name": "What does an LLM evaluation suite look like in practice?", "acceptedAnswer": {"@type": "Answer", "text": "A version-controlled golden set of test cases run on every prompt or model change; automatic checks for groundedness and output schema validity; an LLM-as-judge calibrated against periodic human ratings; and production monitoring of cost, latency, refusal rate, and user feedback."}}]}</script>
+</head>
+<body>
+<a class="ub-skip" href="#main">Skip to main content</a>
+<header class="ub-header">
+  <div class="ub-wrap ub-header-inner">
+    <a class="ub-logo" href="/" aria-label="Ultrabot home">Ultra<span>bot</span></a>
+    <button class="ub-menu" type="button" aria-expanded="false" aria-controls="ub-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>
+    <nav class="ub-nav" id="ub-nav" aria-label="Main">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li class="ub-has-sub"><details><summary>Platforms</summary><ul>
+          <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+          <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+          <li><a href="/n8n-automation/">n8n automation</a></li>
+        </ul></details></li>
+        <li><a href="/insights/" aria-current="page">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a class="ub-nav-cta" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<article class="ub-article">
+<nav class="ub-breadcrumb" aria-label="Breadcrumb"><a href="/">Ultrabot</a> / <a href="/insights/">Insights</a> / <span aria-current="page">LLMs in production</span></nav>
+<h1>LLMs in Production</h1>
+<p class="ub-meta"><time datetime="2026-07-13">Updated July 13, 2026</time> · Reference article · By Dr. Yochai Edlitz, MLAIA Data Science</p>
+<p>Moving a large language model (LLM) feature from demo to dependable product is an engineering discipline of its own. A prototype that answers impressively in a notebook faces different constraints in production: non-deterministic outputs, adversarial and out-of-distribution inputs, evaluation without a single ground truth, and unit economics measured in tokens. This article summarizes the established architecture choices and operational practices. For adjacent topics see the posts on <a href="/insights/blog-llms/">enterprise LLM integration</a>, <a href="/insights/blog-agents-production/">agentic AI in production</a>, and <a href="/insights/agentic-ai-production-gap/">why most agentic pilots never ship</a>.</p>
+
+<h2>Prompting, RAG, or fine-tuning</h2>
+<p>Three mechanisms adapt a general model to a task, and they solve different problems:</p>
+<ul>
+<li><strong>Prompt engineering</strong> (instructions, few-shot examples, structured output constraints) changes <em>behavior</em>. It is the cheapest lever, requires no training data, and should be exhausted first.</li>
+<li><strong>Retrieval-augmented generation (RAG)</strong> changes <em>knowledge</em>: relevant documents are retrieved — typically via embedding similarity plus keyword search and a reranker — and inserted into the context. RAG suits fast-changing or proprietary corpora, provides citations, and allows per-user access control, since retrieval can respect document permissions.</li>
+<li><strong>Fine-tuning</strong> (usually parameter-efficient, e.g. LoRA) changes <em>form and skill</em>: consistent style, domain jargon, structured-output reliability, or narrow-task accuracy on a smaller, cheaper model. It is the wrong tool for injecting facts — updated knowledge still requires retrieval or retraining.</li>
+</ul>
+<p>The approaches compose: a fine-tuned small model with RAG and careful prompting is a common production endpoint. The pragmatic sequencing is prompting → RAG (if the failure is missing knowledge) → fine-tuning (if the failure is form, cost, or latency).</p>
+
+<h2>Evaluation</h2>
+<p>LLM systems require layered evaluation because outputs are open-ended. Standard practice combines: a <strong>golden set</strong> of curated input–expected-output pairs run on every change (prompt edits are code changes and regress like code); <strong>automatic metrics</strong> where the task permits (exact match, groundedness checks against retrieved sources, schema validity for structured output); <strong>LLM-as-judge</strong> scoring for fluency and helpfulness — useful but biased (position, verbosity, self-preference), so it should be calibrated against periodic <strong>human review</strong>; and <strong>online monitoring</strong> of user feedback, refusal rates, latency, and cost. For RAG, retrieval is evaluated separately from generation (recall of the relevant passages), since retrieval failures masquerade as model failures.</p>
+
+<h2>Hallucination mitigation</h2>
+<p>Hallucination — fluent, confident, false output — is a property of the technology, not a bug that disappears with scale. Mitigations that work in practice: <strong>grounding</strong> answers in retrieved sources and requiring citations; instructing and rewarding <strong>abstention</strong> ("I don't know" as a first-class answer); constraining tasks to <strong>extraction and summarization</strong> over open-ended generation where feasible; <strong>verifier passes</strong> that check claims against sources before display; <strong>structured outputs</strong> validated against schemas; and routing high-stakes outputs to <strong>human review</strong>. Measurement matters as much as mitigation: track groundedness on the golden set so regressions surface before users find them.</p>
+
+<h2>On-premises and small language models</h2>
+<p>Not every deployment can send data to a hosted API. Data-residency requirements, regulated data (health, defense, finance), latency floors, and predictable cost at high volume all push toward self-hosted <strong>open-weight models</strong> and <strong>small language models (SLMs)</strong> in the roughly 1–15B parameter range. Quantization (e.g. 4-bit) and efficient inference servers make capable models runnable on a single GPU, and a fine-tuned SLM frequently matches a frontier model on a <em>narrow</em> task at a fraction of the cost — while remaining well behind on open-ended reasoning. The realistic pattern is a portfolio: local models for sensitive or high-volume narrow tasks, frontier APIs for hard ones. The economics and Israeli enterprise context are covered in <a href="/insights/blog-slm-onprem-israel/">Why Israeli Enterprises Are Bringing AI On-Prem</a>.</p>
+
+<h2>Cost and latency engineering</h2>
+<p>LLM serving cost is token count times per-token price (or its GPU-time equivalent), which makes cost an engineering variable. The standard toolkit: <strong>model routing</strong> (a cheap model handles easy requests; hard ones escalate — a cascade); <strong>prompt/prefix caching</strong> to avoid re-processing repeated context; <strong>context discipline</strong> (retrieve less but better, summarize history instead of resending it); <strong>batching</strong> for offline workloads; and <strong>streaming</strong> plus optimizing time-to-first-token, which dominates perceived latency in interactive use. Latency budgets should be set end-to-end — retrieval, generation, and post-processing — the same way speech systems budget theirs (see <a href="/insights/blog-voice-ai-production/">Voice AI Grows Up</a>).</p>
+
+<div class="ub-takeaways">
+<h2>Key takeaways</h2>
+<ul>
+<li>Prompting changes behavior, RAG changes knowledge, fine-tuning changes form — exhaust them in that order, and compose them freely.</li>
+<li>Evaluate in layers: golden-set regression tests, automatic groundedness/schema checks, calibrated LLM-as-judge, human review, and online monitoring.</li>
+<li>Hallucination is managed, not eliminated: grounding, citations, abstention, verification, and human review for high stakes.</li>
+<li>SLMs and on-prem deployment trade open-ended capability for privacy, latency, and unit-cost control; most mature stacks run a model portfolio.</li>
+<li>Cost and latency are design variables: routing, caching, context discipline, and streaming typically cut both by large factors.</li>
+</ul>
+</div>
+
+<h2>Frequently asked questions</h2>
+<h3>When should I fine-tune instead of using RAG?</h3>
+<p>Fine-tune when the model's <em>form</em> is wrong — style, format, domain phrasing, or reliability on a narrow task — or when you need a smaller model to hit cost/latency targets. Use RAG when the model's <em>knowledge</em> is wrong or stale. Fine-tuning does not reliably add facts, and RAG does not fix formatting or style.</p>
+<h3>Can hallucinations be eliminated?</h3>
+<p>No. They can be reduced substantially — grounding with citations, abstention, verifier passes, and constrained tasks — and their rate can be measured and monitored. System design should assume a nonzero rate and route consequential outputs through verification or human review.</p>
+<h3>Are small language models good enough for production?</h3>
+<p>Often, for narrow tasks: classification, extraction, summarization, and domain-specific Q&amp;A after fine-tuning. They lag frontier models on open-ended reasoning and long-horizon tasks, which is why many production systems route between a local SLM and a frontier API by request difficulty.</p>
+<h3>What does an LLM evaluation suite look like in practice?</h3>
+<p>A version-controlled golden set (typically hundreds of cases) run on every prompt or model change; automatic checks for groundedness and output schema; an LLM judge calibrated against periodic human ratings; and production dashboards for cost, latency, refusal rate, and user feedback.</p>
+
+<p>Ultrabot is built by MLAIA, which consults on LLMs in production — RAG architectures, evaluation harnesses, and on-prem/SLM deployments. See MLAIA's <a href="https://www.mlaia.com/index.html#domains">LLM &amp; NLP domain expertise</a> or <a href="#contact">contact us</a>.</p>
+</article>
+<section class="ub-contact" id="contact" aria-labelledby="contact-h">
+  <div class="ub-wrap ub-contact-grid">
+    <div>
+      <p class="ub-eyebrow">Talk to a person</p>
+      <h2 id="contact-h">Tell us what<br>you’re working on.</h2>
+      <p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p>
+      <p>Please don’t include confidential datasets, credentials or patient information.</p>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>
+    </div>
+    <form class="ub-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="source" value="ultrabot.ai">
+      <input type="hidden" name="topic" value="llms-in-production">
+      <input type="hidden" name="_subject" value="Ultrabot inquiry (llms-in-production)">
+      <div class="ub-form-row">
+        <label for="cf-name">Name<input id="cf-name" name="name" autocomplete="name" required></label>
+        <label for="cf-company">Company<input id="cf-company" name="company" autocomplete="organization"></label>
+      </div>
+      <label for="cf-email">Work email<input id="cf-email" type="email" name="email" autocomplete="email" required></label>
+      <label for="cf-message">What would you like your agent to do?<textarea id="cf-message" name="message" required></textarea></label>
+      <p class="ub-form-small">Your message goes to MLAIA Data Science, who build Ultrabot, and is handled under the <a href="https://www.mlaia.com/privacy.html">MLAIA Privacy Policy</a>.</p>
+      <button type="submit" class="ub-btn">Send message <span aria-hidden="true">→</span></button>
+      <p class="ub-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="ub-footer">
+  <div class="ub-wrap ub-footer-inner">
+    <div>
+      <a class="ub-logo" href="/">Ultra<span>bot</span></a>
+      <p>Hebrew &amp; English AI voice agents with a face.</p>
+      <p class="ub-built">Built by <a href="https://www.mlaia.com/audio-ai/">MLAIA Data Science</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+        <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+        <li><a href="/n8n-automation/">n8n automation</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span><span class="ub-sr"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
+      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="https://www.mlaia.com/accessibility.html">Accessibility</a></p>
+      <p>© 2026 MLAIA Data Science · Israel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
