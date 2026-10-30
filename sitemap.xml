@@ -2,8 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://ultrabot.ai/</loc><lastmod>2026-10-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/"/></url>
   <url><loc>https://ultrabot.ai/he/</loc><lastmod>2026-10-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/"/></url>
-  <url><loc>https://ultrabot.ai/voice-agents/</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://ultrabot.ai/avatars/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://ultrabot.ai/voice-agents/</loc><lastmod>2026-10-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/voice-agents/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/voice-agents/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/voice-agents/"/></url>
+  <url><loc>https://ultrabot.ai/he/voice-agents/</loc><lastmod>2026-10-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/voice-agents/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/voice-agents/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/voice-agents/"/></url>
+  <url><loc>https://ultrabot.ai/avatars/</loc><lastmod>2026-10-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/avatars/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/avatars/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/avatars/"/></url>
+  <url><loc>https://ultrabot.ai/he/avatars/</loc><lastmod>2026-10-30</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/avatars/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/avatars/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/avatars/"/></url>
   <url><loc>https://ultrabot.ai/aws-bedrock-agents/</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://ultrabot.ai/langgraph-agents/</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://ultrabot.ai/n8n-automation/</loc><lastmod>2026-10-30</lastmod></url>
