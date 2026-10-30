@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LangGraph development | Ultrabot: Hebrew &amp; English voice agents</title>
+<meta name="description" content="LangGraph development for production agents: typed state, tool calling with limits, human approval steps, retries, tracing and step-level evaluation.">
+<link rel="canonical" href="https://ultrabot.ai/langgraph-agents/">
+<meta property="og:site_name" content="Ultrabot">
+<meta property="og:title" content="LangGraph development | Ultrabot: Hebrew &amp; English voice agents">
+<meta property="og:description" content="LangGraph development for production agents: typed state, tool calling with limits, human approval steps, retries, tracing and step-level evaluation.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ultrabot.ai/langgraph-agents/">
+<meta property="og:image" content="https://ultrabot.ai/assets/og/langgraph-agents.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ultrabot.ai/assets/og/langgraph-agents.png">
+<meta name="theme-color" content="#0057ff">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ultrabot.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/ultrabot.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "LangGraph agent development", "serviceType": "LangGraph agent development", "description": "LangGraph development for production agents: typed state, tool calling with limits, human approval steps, retries, tracing and step-level evaluation.", "url": "https://ultrabot.ai/langgraph-agents/", "areaServed": "Worldwide", "provider": {"@type": "Organization", "name": "Ultrabot", "url": "https://ultrabot.ai/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ultrabot", "item": "https://ultrabot.ai/"}, {"@type": "ListItem", "position": 2, "name": "LangGraph agents", "item": "https://ultrabot.ai/langgraph-agents/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "When is LangGraph the right choice over a simple chain?", "acceptedAnswer": {"@type": "Answer", "text": "When the assistant has to take several actions in order, recover from failures, pause for a person or resume later. For a single retrieval-and-answer step, a simple chain or a direct API call is easier to maintain."}}, {"@type": "Question", "name": "Can a LangGraph agent run on our own cloud?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The graph is ordinary Python, so it runs in a container or serverless function on AWS, Azure or Google Cloud, or on your own servers, with any model your policies allow, including models through Amazon Bedrock."}}, {"@type": "Question", "name": "Which model should the agent use?", "acceptedAnswer": {"@type": "Answer", "text": "We test candidate models on your evaluation set and compare success rate, latency and cost. Often a smaller, faster model handles routing and simple steps while a stronger model handles the hard ones."}}, {"@type": "Question", "name": "How do you stop an agent from taking a harmful action?", "acceptedAnswer": {"@type": "Answer", "text": "Tools only do what their code allows, inputs are validated, and consequential actions stop at an approval step. The agent cannot reach systems it was not given a tool for."}}, {"@type": "Question", "name": "Can it work in Hebrew?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. We have built assistants that work in Hebrew and English, including retrieval over mixed-language content. Hebrew needs its own test cases, because tokenisation, search and model behaviour differ from English."}}]}</script>
+</head>
+<body>
+<a class="ub-skip" href="#main">Skip to main content</a>
+<header class="ub-header">
+  <div class="ub-wrap ub-header-inner">
+    <a class="ub-logo" href="/" aria-label="Ultrabot home">Ultra<span>bot</span></a>
+    <button class="ub-menu" type="button" aria-expanded="false" aria-controls="ub-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>
+    <nav class="ub-nav" id="ub-nav" aria-label="Main">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li class="ub-has-sub ub-current"><details><summary>Platforms</summary><ul>
+          <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+          <li><a href="/langgraph-agents/" aria-current="page">LangGraph agents</a></li>
+          <li><a href="/n8n-automation/">n8n automation</a></li>
+        </ul></details></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a class="ub-nav-cta" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="ub-page-hero"><div class="ub-wrap"><nav class="ub-breadcrumb" aria-label="Breadcrumb"><a href="/">Ultrabot</a> / <span aria-current="page">LangGraph agents</span></nav><div class="ub-hero-grid"><div><p class="ub-eyebrow">LangGraph development</p><h1>Agents as explicit graphs.<br>State you can inspect, steps you can test.</h1><p class="ub-intro">Agents built as a graph of steps: call a model, run a tool, ask a person, retry. For assistants that act in order, recover from errors and stop for approval.</p><div class="ub-actions"><a href="#contact" class="ub-btn">Discuss your agent workflow <span aria-hidden="true">→</span></a><a class="ub-btn ghost" href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">Talk to our demo agent <span aria-hidden="true">↗</span><span class="ub-sr"> (opens in a new tab)</span></a></div></div>
+<aside class="ub-brief"><h2>Built around your process</h2><dl><div><dt>Your workflow</dt><dd>The steps, systems and decisions the agent supports</dd></div><div><dt>Your guardrails</dt><dd>Which actions need approval, and who gives it</dd></div><div><dt>Our focus</dt><dd>State, tools, evaluation &amp; tracing designed together</dd></div></dl></aside></div><div class="ub-proofline"><span>Ultrabot, built by <a href="https://www.mlaia.com/audio-ai/">MLAIA Data Science</a></span><span>Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute</span></div></div></section>
+<section class="ub-section" id="why-a-graph"><div class="ub-wrap"><p class="ub-eyebrow">Why a graph, not a loop</p><h2>A free-running loop is easy to demo.<br>A graph is easier to operate.</h2><p class="ub-section-lead">A free loop works in a demo. In production, the model picks what to say and which tool to call, but the graph decides what is allowed next. Fixed structure where the process is known, model judgement where it helps. More on <a href="/">what an Ultrabot agent does</a>.</p><div class="ub-grid"><article class="ub-service"><span class="ub-number">01</span><h3>Typed shared state</h3><p>Saved after each step, so a run can pause, resume or be replayed.</p></article><article class="ub-service"><span class="ub-number">02</span><h3>Tool calling with limits</h3><p>Validated inputs, caps per turn, timeouts, and a defined reply when a tool fails.</p></article><article class="ub-service"><span class="ub-number">03</span><h3>Human-in-the-loop steps</h3><p>Sending, booking or refunding waits for a person to approve, edit or reject.</p></article><article class="ub-service"><span class="ub-number">04</span><h3>Branches, retries &amp; fallbacks</h3><p>A failed search is retried; an unsure answer goes to a person, not the user.</p></article><article class="ub-service"><span class="ub-number">05</span><h3>Multi-agent only when it helps</h3><p>Each extra agent adds delay and cost. We split only when tests show a gain.</p></article><article class="ub-service"><span class="ub-number">06</span><h3>Streaming to the interface</h3><p>Users see progress as it happens, and a voice can start at the first sentence.</p></article></div></div></section><section class="ub-section white" id="what-we-measure"><div class="ub-wrap"><p class="ub-eyebrow">Quality you can measure</p><h2>Evaluate the steps,<br>not only the final answer.</h2><p class="ub-section-lead">We score both the outcome and the path, on a set of real tasks.</p><div class="ub-grid"><article class="ub-service"><h3>Task success</h3><p>Did it finish the task, within the allowed actions?</p></article><article class="ub-service"><h3>Tool-call correctness</h3><p>Right tool, valid arguments, no extra calls.</p></article><article class="ub-service"><h3>Grounding</h3><p>Every claim backed by a source, or an honest "I don't know".</p></article><article class="ub-service"><h3>Latency &amp; cost per run</h3><p>Tracked on every change to prompts or models.</p></article></div><div class="ub-capabilities"><strong>Typical stack</strong><span>LangGraph</span><span>LangChain tools</span><span>Claude, GPT &amp; Gemini models</span><span>Amazon Bedrock</span><span>LangSmith or OpenTelemetry tracing</span><span>Postgres &amp; pgvector</span><span>FastAPI services</span></div></div></section><section class="ub-section" id="experience"><div class="ub-wrap"><p class="ub-eyebrow">What we have built</p><h2>Agents that take actions,<br>with the safeguards around them.</h2><p class="ub-section-lead">A voice-and-avatar assistant for a healthcare app, currently in development: Claude on Bedrock with about twenty tools, capped per turn, and no settings change without on-screen confirmation. Earlier, a self-serve website chatbot that answered in Hebrew or English and captured leads. The lesson from both: tight tools, and log what the agent did, not what users said.</p><p class="ub-note">We describe client projects in general terms. Details are shared in conversation, subject to confidentiality.</p></div></section><section class="ub-section white" id="process"><div class="ub-wrap"><p class="ub-eyebrow">A practical delivery path</p><h2>From one workflow<br>to a production agent.</h2><div class="ub-process"><article class="ub-step"><span>01</span><h3>Map the workflow</h3><p>Steps, systems, approvals, and what success means.</p></article><article class="ub-step"><span>02</span><h3>Build the evaluation set</h3><p>Real requests and edge cases, before tuning prompts.</p></article><article class="ub-step"><span>03</span><h3>Graph &amp; tools</h3><p>Build, measure, fix the worst failures first.</p></article><article class="ub-step"><span>04</span><h3>Deploy &amp; observe</h3><p>Tracing, cost limits and alerts, re-tested on every change.</p></article></div><p class="ub-actions"><a class="ub-btn" href="#contact">Start with one workflow →</a></p></div></section>
+<section class="ub-section"><div class="ub-wrap ub-faq"><p class="ub-eyebrow">Before we start</p><h2>Good questions. Straight answers.</h2><details><summary>When is LangGraph the right choice over a simple chain?</summary><p>When the assistant has to take several actions in order, recover from failures, pause for a person or resume later. For a single retrieval-and-answer step, a simple chain or a direct API call is easier to maintain.</p></details><details><summary>Can a LangGraph agent run on our own cloud?</summary><p>Yes. The graph is ordinary Python, so it runs in a container or serverless function on AWS, Azure or Google Cloud, or on your own servers, with any model your policies allow, including models through Amazon Bedrock.</p></details><details><summary>Which model should the agent use?</summary><p>We test candidate models on your evaluation set and compare success rate, latency and cost. Often a smaller, faster model handles routing and simple steps while a stronger model handles the hard ones.</p></details><details><summary>How do you stop an agent from taking a harmful action?</summary><p>Tools only do what their code allows, inputs are validated, and consequential actions stop at an approval step. The agent cannot reach systems it was not given a tool for.</p></details><details><summary>Can it work in Hebrew?</summary><p>Yes. We have built assistants that work in Hebrew and English, including retrieval over mixed-language content. Hebrew needs its own test cases, because tokenisation, search and model behaviour differ from English.</p></details></div></section>
+<section class="ub-section white"><div class="ub-wrap"><p class="ub-eyebrow">Keep exploring</p><h2>Related reading &amp; tools.</h2><div class="ub-grid ub-reads"><a href="/insights/blog-agents-production/"><small>Agentic AI</small><strong>Agentic AI in production: a practical framework <span aria-hidden="true">↗</span></strong></a><a href="/insights/blog-ai-agents-pilot-to-production/"><small>AI agents</small><strong>From pilot to production: beating the odds <span aria-hidden="true">↗</span></strong></a><a href="/insights/blog-rag-production/"><small>Retrieval</small><strong>RAG in production <span aria-hidden="true">↗</span></strong></a><a href="/aws-bedrock-agents/"><small>Related topic</small><strong>AI agents on AWS <span aria-hidden="true">↗</span></strong></a></div></div></section>
+<section class="ub-contact" id="contact" aria-labelledby="contact-h">
+  <div class="ub-wrap ub-contact-grid">
+    <div>
+      <p class="ub-eyebrow">Talk to a person</p>
+      <h2 id="contact-h">Tell us what<br>you’re working on.</h2>
+      <p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p>
+      <p>Please don’t include confidential datasets, credentials or patient information.</p>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>
+    </div>
+    <form class="ub-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="source" value="ultrabot.ai">
+      <input type="hidden" name="topic" value="langgraph-agents">
+      <input type="hidden" name="_subject" value="Ultrabot inquiry (langgraph-agents)">
+      <div class="ub-form-row">
+        <label for="cf-name">Name<input id="cf-name" name="name" autocomplete="name" required></label>
+        <label for="cf-company">Company<input id="cf-company" name="company" autocomplete="organization"></label>
+      </div>
+      <label for="cf-email">Work email<input id="cf-email" type="email" name="email" autocomplete="email" required></label>
+      <label for="cf-message">What would you like your agent to do?<textarea id="cf-message" name="message" required></textarea></label>
+      <p class="ub-form-small">Your message goes to MLAIA Data Science, who build Ultrabot, and is handled under the <a href="https://www.mlaia.com/privacy.html">MLAIA Privacy Policy</a>.</p>
+      <button type="submit" class="ub-btn">Send message <span aria-hidden="true">→</span></button>
+      <p class="ub-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="ub-footer">
+  <div class="ub-wrap ub-footer-inner">
+    <div>
+      <a class="ub-logo" href="/">Ultra<span>bot</span></a>
+      <p>Hebrew &amp; English AI voice agents with a face.</p>
+      <p class="ub-built">Built by <a href="https://www.mlaia.com/audio-ai/">MLAIA Data Science</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+        <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+        <li><a href="/n8n-automation/">n8n automation</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span><span class="ub-sr"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
+      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="https://www.mlaia.com/accessibility.html">Accessibility</a></p>
+      <p>© 2026 MLAIA Data Science · Israel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

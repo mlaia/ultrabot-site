@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS Bedrock agents development | Ultrabot: Hebrew &amp; English voice agents</title>
+<meta name="description" content="AWS Bedrock agents development: Claude, Llama, Mistral and Nova agents inside your AWS account, with Guardrails, AgentCore, Lambda tools, least-privilege roles and voice on Transcribe, Polly and Connect.">
+<link rel="canonical" href="https://ultrabot.ai/aws-bedrock-agents/">
+<meta property="og:site_name" content="Ultrabot">
+<meta property="og:title" content="AWS Bedrock agents development | Ultrabot: Hebrew &amp; English voice agents">
+<meta property="og:description" content="AWS Bedrock agents development: Claude, Llama, Mistral and Nova agents inside your AWS account, with Guardrails, AgentCore, Lambda tools, least-privilege roles and voice on Transcribe, Polly and Connect.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ultrabot.ai/aws-bedrock-agents/">
+<meta property="og:image" content="https://ultrabot.ai/assets/og/aws-bedrock-agents.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://ultrabot.ai/assets/og/aws-bedrock-agents.png">
+<meta name="theme-color" content="#0057ff">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/ultrabot.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/ultrabot.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "AWS Bedrock agents development", "serviceType": "AWS Bedrock agents development", "description": "AWS Bedrock agents development: Claude, Llama, Mistral and Nova agents inside your AWS account, with Guardrails, AgentCore, Lambda tools, least-privilege roles and voice on Transcribe, Polly and Connect.", "url": "https://ultrabot.ai/aws-bedrock-agents/", "areaServed": "Worldwide", "provider": {"@type": "Organization", "name": "Ultrabot", "url": "https://ultrabot.ai/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ultrabot", "item": "https://ultrabot.ai/"}, {"@type": "ListItem", "position": 2, "name": "AWS Bedrock agents", "item": "https://ultrabot.ai/aws-bedrock-agents/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does our data leave our AWS account when using Bedrock?", "acceptedAnswer": {"@type": "Answer", "text": "Bedrock runs models within AWS, and you choose the regions. Data handling depends on the model provider and your configuration; we document which services, regions and logs each request touches before go-live."}}, {"@type": "Question", "name": "Bedrock Agents, AgentCore or our own code?", "acceptedAnswer": {"@type": "Answer", "text": "Managed agents are quickest for standard tool-calling assistants. AgentCore suits teams that want their own agent code with a managed runtime. Fully custom code on Lambda or containers gives the most control. We often prototype with one and keep the option to move."}}, {"@type": "Question", "name": "Can the agent answer phone calls?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Amazon Connect can route calls to the agent through streaming speech services, with transfer to a person when needed. We measure end-to-end delay on real phone audio, which is narrower-band than web audio."}}, {"@type": "Question", "name": "Does it support Hebrew?", "acceptedAnswer": {"@type": "Answer", "text": "Amazon Transcribe supports Hebrew streaming transcription and Bedrock models handle Hebrew text. Speech output in Hebrew usually needs a voice from another provider, which we connect alongside AWS."}}, {"@type": "Question", "name": "How do you control cost for a public-facing agent?", "acceptedAnswer": {"@type": "Answer", "text": "Rate limits per user and session, short sessions, caps on tokens and tool calls per turn, a bot check before expensive steps, and a budget alarm that turns the endpoint off at a fixed monthly amount."}}]}</script>
+</head>
+<body>
+<a class="ub-skip" href="#main">Skip to main content</a>
+<header class="ub-header">
+  <div class="ub-wrap ub-header-inner">
+    <a class="ub-logo" href="/" aria-label="Ultrabot home">Ultra<span>bot</span></a>
+    <button class="ub-menu" type="button" aria-expanded="false" aria-controls="ub-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</button>
+    <nav class="ub-nav" id="ub-nav" aria-label="Main">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li class="ub-has-sub ub-current"><details><summary>Platforms</summary><ul>
+          <li><a href="/aws-bedrock-agents/" aria-current="page">AWS Bedrock agents</a></li>
+          <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+          <li><a href="/n8n-automation/">n8n automation</a></li>
+        </ul></details></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a class="ub-nav-cta" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="ub-page-hero"><div class="ub-wrap"><nav class="ub-breadcrumb" aria-label="Breadcrumb"><a href="/">Ultrabot</a> / <span aria-current="page">AWS Bedrock agents</span></nav><div class="ub-hero-grid"><div><p class="ub-eyebrow">AWS Bedrock agents development</p><h1>AI agents on AWS.<br>In your account, under your controls.</h1><p class="ub-intro">Claude, Llama, Mistral and Nova inside your AWS account, with your permissions and regions. We design the agent, its data, and its voice and phone channels.</p><div class="ub-actions"><a href="#contact" class="ub-btn">Discuss your AWS agent <span aria-hidden="true">→</span></a><a class="ub-btn ghost" href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">Talk to our demo agent <span aria-hidden="true">↗</span><span class="ub-sr"> (opens in a new tab)</span></a></div></div>
+<aside class="ub-brief"><h2>Built inside your account</h2><dl><div><dt>Your data</dt><dd>Stays in your chosen AWS regions and services</dd></div><div><dt>Your controls</dt><dd>IAM, VPC, KMS, CloudTrail &amp; budgets</dd></div><div><dt>Our focus</dt><dd>Agent, workflow &amp; channels designed together</dd></div></dl></aside></div><div class="ub-proofline"><span>Ultrabot, built by <a href="https://www.mlaia.com/audio-ai/">MLAIA Data Science</a></span><span>Led by Dr. Yochai Edlitz · Ph.D., Weizmann Institute</span></div></div></section>
+<section class="ub-section" id="building-blocks"><div class="ub-wrap"><p class="ub-eyebrow">The building blocks</p><h2>Pick the managed pieces.<br>Write code where the logic is yours.</h2><p class="ub-section-lead">Managed agent features or your own code: it depends on how much control you need.</p><div class="ub-grid"><article class="ub-service"><span class="ub-number">01</span><h3>Amazon Bedrock models</h3><p>One API for streaming and tools across models, kept inside one geography such as the EU.</p></article><article class="ub-service"><span class="ub-number">02</span><h3>Bedrock Agents &amp; AgentCore</h3><p>Managed agents, or AgentCore to run your own agent code with managed memory and identity.</p></article><article class="ub-service"><span class="ub-number">03</span><h3>Knowledge Bases &amp; retrieval</h3><p>Managed search over S3 documents, or OpenSearch or pgvector when you need custom permissions.</p></article><article class="ub-service"><span class="ub-number">04</span><h3>Guardrails</h3><p>Content filters, denied topics and masking of sensitive data, alongside tool permissions.</p></article><article class="ub-service"><span class="ub-number">05</span><h3>Lambda &amp; Step Functions</h3><p>Tools as Lambdas with narrow roles; long processes with retries and human approval.</p></article><article class="ub-service"><span class="ub-number">06</span><h3>Your own agent code</h3><p>Full control over each step, still in your account. See <a href="/langgraph-agents/">LangGraph agents</a>.</p></article></div></div></section><section class="ub-section white" id="voice-on-aws"><div class="ub-wrap"><p class="ub-eyebrow">Voice &amp; contact centre on AWS</p><h2>The same agent,<br>speaking on the web or the phone.</h2><p class="ub-section-lead">Transcribe (including Hebrew), Polly, Nova Sonic and Connect cover voice end to end. In a healthcare assistant we are developing, everything runs EU-only and the code refuses any other region. More on <a href="/voice-agents/">voice agents</a>.</p><div class="ub-grid"><article class="ub-service"><h3>Web voice</h3><p>Browser audio in, a voice streamed back sentence by sentence.</p></article><article class="ub-service"><h3>Phone</h3><p>Amazon Connect, with transfer to a person and a summary.</p></article><article class="ub-service"><h3>Speech-to-speech</h3><p>Nova Sonic in one step, compared with a pipeline first.</p></article></div><div class="ub-capabilities"><strong>Services we work with</strong><span>Bedrock</span><span>AgentCore</span><span>Knowledge Bases</span><span>Guardrails</span><span>Lambda</span><span>Step Functions</span><span>ECS Fargate</span><span>API Gateway WebSocket</span><span>Transcribe</span><span>Polly</span><span>Nova Sonic</span><span>Connect</span><span>S3</span><span>OpenSearch</span><span>Secrets Manager</span><span>CloudWatch</span></div></div></section><section class="ub-section" id="security-cost"><div class="ub-wrap"><p class="ub-eyebrow">Security &amp; cost</p><h2>Least privilege for tools.<br>Hard limits for spend.</h2><p class="ub-section-lead">The risk is in what tools can touch and what the agent can spend. We set both.</p><div class="ub-grid"><article class="ub-service"><h3>Narrow roles per tool</h3><p>Each tool gets its own narrow IAM role. No broad credentials.</p></article><article class="ub-service"><h3>Region &amp; data residency</h3><p>Pinned to your allowed regions; prompts and audio kept only if you choose.</p></article><article class="ub-service"><h3>Budgets &amp; throttles</h3><p>Rate limits, caps per turn, and budget alarms that can switch off a public endpoint.</p></article><article class="ub-service"><h3>Audit trail</h3><p>Every tool call logged, without storing the user's words.</p></article></div></div></section><section class="ub-section white" id="process"><div class="ub-wrap"><p class="ub-eyebrow">A practical delivery path</p><h2>Start small in your account.<br>Then harden and scale.</h2><div class="ub-process"><article class="ub-step"><span>01</span><h3>Choose the use case</h3><p>Users, channels, actions, data and regions.</p></article><article class="ub-step"><span>02</span><h3>Prototype on Bedrock</h3><p>Compare models on your tasks; managed or own code.</p></article><article class="ub-step"><span>03</span><h3>Tools &amp; channels</h3><p>Narrow-role tools, retrieval, voice and approvals.</p></article><article class="ub-step"><span>04</span><h3>Harden &amp; operate</h3><p>Infrastructure as code, alarms and tests on every change.</p></article></div><p class="ub-actions"><a class="ub-btn" href="#contact">Plan your AWS agent →</a></p></div></section>
+<section class="ub-section"><div class="ub-wrap ub-faq"><p class="ub-eyebrow">Before we start</p><h2>Good questions. Straight answers.</h2><details><summary>Does our data leave our AWS account when using Bedrock?</summary><p>Bedrock runs models within AWS, and you choose the regions. Data handling depends on the model provider and your configuration; we document which services, regions and logs each request touches before go-live.</p></details><details><summary>Bedrock Agents, AgentCore or our own code?</summary><p>Managed agents are quickest for standard tool-calling assistants. AgentCore suits teams that want their own agent code with a managed runtime. Fully custom code on Lambda or containers gives the most control. We often prototype with one and keep the option to move.</p></details><details><summary>Can the agent answer phone calls?</summary><p>Yes. Amazon Connect can route calls to the agent through streaming speech services, with transfer to a person when needed. We measure end-to-end delay on real phone audio, which is narrower-band than web audio.</p></details><details><summary>Does it support Hebrew?</summary><p>Amazon Transcribe supports Hebrew streaming transcription and Bedrock models handle Hebrew text. Speech output in Hebrew usually needs a voice from another provider, which we connect alongside AWS.</p></details><details><summary>How do you control cost for a public-facing agent?</summary><p>Rate limits per user and session, short sessions, caps on tokens and tool calls per turn, a bot check before expensive steps, and a budget alarm that turns the endpoint off at a fixed monthly amount.</p></details></div></section>
+<section class="ub-section white"><div class="ub-wrap"><p class="ub-eyebrow">Keep exploring</p><h2>Related reading &amp; tools.</h2><div class="ub-grid ub-reads"><a href="https://www.mlaia.com/blog-cloud-ml-platforms-rapid-development.html"><small>Cloud platforms</small><strong>Bedrock, Vertex AI and Azure AI for faster ML R&amp;D <span aria-hidden="true">↗</span></strong></a><a href="/insights/blog-sovereign-ai-onprem/"><small>Data residency</small><strong>Sovereign AI and on-premises deployment <span aria-hidden="true">↗</span></strong></a><a href="/insights/blog-agents-production/"><small>Agentic AI</small><strong>Agentic AI in production: a practical framework <span aria-hidden="true">↗</span></strong></a><a href="/voice-agents/"><small>Related topic</small><strong>Voice agents <span aria-hidden="true">↗</span></strong></a></div></div></section>
+<section class="ub-contact" id="contact" aria-labelledby="contact-h">
+  <div class="ub-wrap ub-contact-grid">
+    <div>
+      <p class="ub-eyebrow">Talk to a person</p>
+      <h2 id="contact-h">Tell us what<br>you’re working on.</h2>
+      <p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p>
+      <p>Please don’t include confidential datasets, credentials or patient information.</p>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>
+    </div>
+    <form class="ub-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="source" value="ultrabot.ai">
+      <input type="hidden" name="topic" value="aws-bedrock-agents">
+      <input type="hidden" name="_subject" value="Ultrabot inquiry (aws-bedrock-agents)">
+      <div class="ub-form-row">
+        <label for="cf-name">Name<input id="cf-name" name="name" autocomplete="name" required></label>
+        <label for="cf-company">Company<input id="cf-company" name="company" autocomplete="organization"></label>
+      </div>
+      <label for="cf-email">Work email<input id="cf-email" type="email" name="email" autocomplete="email" required></label>
+      <label for="cf-message">What would you like your agent to do?<textarea id="cf-message" name="message" required></textarea></label>
+      <p class="ub-form-small">Your message goes to MLAIA Data Science, who build Ultrabot, and is handled under the <a href="https://www.mlaia.com/privacy.html">MLAIA Privacy Policy</a>.</p>
+      <button type="submit" class="ub-btn">Send message <span aria-hidden="true">→</span></button>
+      <p class="ub-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="ub-footer">
+  <div class="ub-wrap ub-footer-inner">
+    <div>
+      <a class="ub-logo" href="/">Ultra<span>bot</span></a>
+      <p>Hebrew &amp; English AI voice agents with a face.</p>
+      <p class="ub-built">Built by <a href="https://www.mlaia.com/audio-ai/">MLAIA Data Science</a></p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/voice-agents/">Voice agents</a></li>
+        <li><a href="/avatars/">Avatars</a></li>
+        <li><a href="/aws-bedrock-agents/">AWS Bedrock agents</a></li>
+        <li><a href="/langgraph-agents/">LangGraph agents</a></li>
+        <li><a href="/n8n-automation/">n8n automation</a></li>
+        <li><a href="/insights/">Insights</a></li>
+        <li><a href="/he/" lang="he" hreflang="he">עברית</a></li>
+        <li><a href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">Live demo <span aria-hidden="true">↗</span><span class="ub-sr"> (opens in a new tab)</span></a></li>
+      </ul>
+    </nav>
+    <div>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
+      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="https://www.mlaia.com/accessibility.html">Accessibility</a></p>
+      <p>© 2026 MLAIA Data Science · Israel</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
