@@ -1,0 +1,39 @@
+# Ultrabot
+
+> Ultrabot builds AI voice agents with a talking face, in Hebrew and English: agents that answer from your documents with sources, act in your CRM and tools with approval, and speak on the web or the phone. Ultrabot is a product of MLAIA Data Science (https://www.mlaia.com/), led by Dr. Yochai Edlitz.
+
+## Company
+
+- **Name**: Ultrabot
+- **Website**: https://ultrabot.ai/
+- **Built by**: MLAIA Data Science (המלאיה מדעני נתונים בע״מ), Yavne, Israel
+- **Languages**: Hebrew and English
+- **Contact**: https://ultrabot.ai/#contact
+- **Live demo**: https://talk.mlaia.com/ (voice, chat, cartoon, 3D and lifelike avatars)
+
+## What we build
+
+- [AI voice agents](https://ultrabot.ai/voice-agents/): streaming speech-to-text, an LLM with tools and natural speech, with low delay, barge-in, Hebrew support and phone integration.
+- [Talking AI avatars](https://ultrabot.ai/avatars/): lip-synced faces driven by the agent's voice, from lightweight browser avatars to photoreal video.
+- [AWS Bedrock agents](https://ultrabot.ai/aws-bedrock-agents/): agents inside your AWS account, with Guardrails, AgentCore, Lambda tools and least-privilege roles.
+- [LangGraph agents](https://ultrabot.ai/langgraph-agents/): typed state, tool calling with limits, human approval steps, retries, tracing and step-level evaluation.
+- [n8n automation](https://ultrabot.ai/n8n-automation/): workflows that connect forms, email, CRM and documents, with validated AI output, approvals and self-hosting.
+- [Hebrew: צ'אט בוט וסוכן קולי AI לעסקים](https://ultrabot.ai/he/)
+
+## Insights
+
+- [Insights hub](https://ultrabot.ai/insights/)
+- [LLMs in production](https://ultrabot.ai/insights/llms-in-production/): prompting vs RAG vs fine-tuning, evaluation, hallucination mitigation, on-prem deployment, cost and latency.
+- [Voice AI in production](https://ultrabot.ai/insights/blog-voice-ai-production/)
+- [AI agents: from pilot to production](https://ultrabot.ai/insights/blog-ai-agents-pilot-to-production/)
+- [Agentic AI in production](https://ultrabot.ai/insights/blog-agents-production/)
+- [The agentic AI production gap](https://ultrabot.ai/insights/agentic-ai-production-gap/)
+- [Enterprise RAG in production](https://ultrabot.ai/insights/blog-rag-production/)
+- [Sovereign AI on-prem in Israel](https://ultrabot.ai/insights/blog-sovereign-ai-onprem/)
+- [Small language models on-prem](https://ultrabot.ai/insights/blog-slm-onprem-israel/)
+- [LLMs for business data](https://ultrabot.ai/insights/blog-llms/)
+
+## Related
+
+- MLAIA Data Science, the applied AI firm behind Ultrabot (audio, medical AI and forecasting): https://www.mlaia.com/
+- NextDemand, MLAIA's demand-forecasting product: https://nextdemand.ai/
