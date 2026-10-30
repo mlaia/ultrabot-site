@@ -31,7 +31,6 @@
 - [Enterprise RAG in production](https://ultrabot.ai/insights/blog-rag-production/)
 - [Sovereign AI on-prem in Israel](https://ultrabot.ai/insights/blog-sovereign-ai-onprem/)
 - [Small language models on-prem](https://ultrabot.ai/insights/blog-slm-onprem-israel/)
-- [LLMs for business data](https://ultrabot.ai/insights/blog-llms/)
 
 ## Related
 
