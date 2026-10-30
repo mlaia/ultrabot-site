@@ -47,16 +47,17 @@
       e.preventDefault();
       const status = form.querySelector('.ub-form-status');
       const button = form.querySelector('button[type=submit]');
+      const he = document.documentElement.lang === 'he';
       if (!form.reportValidity()) return;
       button.disabled = true;
-      status.textContent = 'Sending your message…';
+      status.textContent = he ? 'שולחים את ההודעה…' : 'Sending your message…';
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!res.ok) throw new Error('Submission failed');
         form.reset();
-        status.textContent = 'Thank you. Your message was sent. We will reply by email.';
+        status.textContent = he ? 'תודה. ההודעה נשלחה, ונחזור אליכם במייל.' : 'Thank you. Your message was sent. We will reply by email.';
       } catch {
-        status.textContent = 'Your message could not be sent. Please try again or email yochai@mlaia.com.';
+        status.textContent = he ? 'לא הצלחנו לשלוח את ההודעה. נסו שוב או כתבו ל-yochai@mlaia.com.' : 'Your message could not be sent. Please try again or email yochai@mlaia.com.';
       } finally {
         button.disabled = false;
       }
