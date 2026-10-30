@@ -1,0 +1,25 @@
+<section class="ub-contact" id="contact" aria-labelledby="contact-h">
+  <div class="ub-wrap ub-contact-grid">
+    <div>
+      <p class="ub-eyebrow">Talk to a person</p>
+      <h2 id="contact-h">Tell us what<br>you’re working on.</h2>
+      <p>Share the problem, the data you have and what success would look like. We’ll discuss a practical next step.</p>
+      <p>Please don’t include confidential datasets, credentials or patient information.</p>
+      <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a><br><a href="tel:+972524846282">+972 52 484 6282</a></p>
+    </div>
+    <form class="ub-form" action="https://formspree.io/f/mvzdggyq" method="POST">
+      <input type="hidden" name="source" value="ultrabot.ai">
+      <input type="hidden" name="topic" value="{{TOPIC}}">
+      <input type="hidden" name="_subject" value="Ultrabot inquiry ({{TOPIC}})">
+      <div class="ub-form-row">
+        <label for="cf-name">Name<input id="cf-name" name="name" autocomplete="name" required></label>
+        <label for="cf-company">Company<input id="cf-company" name="company" autocomplete="organization"></label>
+      </div>
+      <label for="cf-email">Work email<input id="cf-email" type="email" name="email" autocomplete="email" required></label>
+      <label for="cf-message">What would you like your agent to do?<textarea id="cf-message" name="message" required></textarea></label>
+      <p class="ub-form-small">Your message goes to MLAIA Data Science, who build Ultrabot, and is handled under the <a href="https://www.mlaia.com/privacy.html">MLAIA Privacy Policy</a>.</p>
+      <button type="submit" class="ub-btn">Send message <span aria-hidden="true">→</span></button>
+      <p class="ub-form-status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
