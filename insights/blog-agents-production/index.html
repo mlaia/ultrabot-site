@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Agentic AI in Production: A Practical Framework for Israeli Enterprises | Ultrabot</title>
-<meta name="description" content="Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool &amp; memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.">
+<meta name="description" content="Most enterprise AI agent pilots never reach production. A practical framework covering the four production pillars — scope design, tool and memory architecture, human-in-the-loop patterns and observability — with Israeli considerations on data residency, Hebrew/English multilingualism and talent, from the MLAIA team behind Ultrabot.">
 <meta name="author" content="Dr. Yochai Edlitz">
 <link rel="canonical" href="https://ultrabot.ai/insights/blog-agents-production/">
 <meta property="og:site_name" content="Ultrabot">
 <meta property="og:title" content="Agentic AI in Production: A Practical Framework for Israeli Enterprises | Ultrabot">
-<meta property="og:description" content="Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool &amp; memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.">
+<meta property="og:description" content="Most enterprise AI agent pilots never reach production. A practical framework covering the four production pillars — scope design, tool and memory architecture, human-in-the-loop patterns and observability — with Israeli considerations on data residency, Hebrew/English multilingualism and talent, from the MLAIA team behind Ultrabot.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://ultrabot.ai/insights/blog-agents-production/">
 <meta property="og:image" content="https://ultrabot.ai/assets/og/home.png">
@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="/assets/ultrabot.css">
 <script>document.documentElement.classList.add('js')</script>
 <script src="/assets/ultrabot.js" defer></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Agentic AI in Production: A Practical Framework for Israeli Enterprises", "description": "Most enterprise AI agent pilots never reach production. This practical framework covers the four production pillars — scope design, tool & memory architecture, human-in-the-loop patterns, and observability — with Israeli-specific considerations on data residency, Hebrew/English multilingualism, and talent.", "image": "https://ultrabot.ai/assets/og/home.png", "datePublished": "2026-04-12", "dateModified": "2026-04-12", "author": {"@type": "Person", "name": "Dr. Yochai Edlitz", "url": "https://www.mlaia.com/#about", "jobTitle": "Founder & CEO, MLAIA"}, "publisher": {"@type": "Organization", "name": "Ultrabot, built by MLAIA Data Science", "url": "https://ultrabot.ai/"}, "url": "https://ultrabot.ai/insights/blog-agents-production/", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ultrabot.ai/insights/blog-agents-production/"}, "inLanguage": "en", "keywords": "agentic AI Israel, AI agents production, enterprise AI agents, LLM agents, human-in-the-loop, AI observability, Hebrew NLP, data residency Israel"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Agentic AI in Production: A Practical Framework for Israeli Enterprises", "description": "Most enterprise AI agent pilots never reach production. A practical framework covering the four production pillars — scope design, tool and memory architecture, human-in-the-loop patterns and observability — with Israeli considerations on data residency, Hebrew/English multilingualism and talent, from the MLAIA team behind Ultrabot.", "image": "https://ultrabot.ai/assets/og/home.png", "datePublished": "2026-04-12", "dateModified": "2026-10-30", "author": {"@type": "Person", "name": "Dr. Yochai Edlitz", "url": "https://www.mlaia.com/#about", "jobTitle": "Founder & CEO, MLAIA"}, "publisher": {"@type": "Organization", "name": "Ultrabot, built by MLAIA Data Science", "url": "https://ultrabot.ai/"}, "url": "https://ultrabot.ai/insights/blog-agents-production/", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ultrabot.ai/insights/blog-agents-production/"}, "inLanguage": "en", "keywords": "agentic AI Israel, AI agents production, enterprise AI agents, LLM agents, human-in-the-loop, AI observability, Hebrew NLP, data residency Israel"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Ultrabot", "item": "https://ultrabot.ai/"}, {"@type": "ListItem", "position": 2, "name": "Insights", "item": "https://ultrabot.ai/insights/"}, {"@type": "ListItem", "position": 3, "name": "Agentic AI in production", "item": "https://ultrabot.ai/insights/blog-agents-production/"}]}</script>
 </head>
 <body>
@@ -57,6 +57,7 @@
 <nav class="ub-breadcrumb" aria-label="Breadcrumb"><a href="/">Ultrabot</a> / <a href="/insights/">Insights</a> / <span aria-current="page">Agentic AI in production</span></nav>
 <h1>Agentic AI in Production: A Practical Framework for Israeli Enterprises</h1>
 <p class="ub-meta"><time datetime="2026-04-12">April 2026</time> · 8 min read · Enterprise AI · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
+<p class="ub-meta ub-updated">Updated <time datetime="2026-10-30">October 2026</time></p>
 <figure class="ub-figure ub-figure-art">
 <svg viewBox="0 0 780 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Agentic AI loop diagram: Plan, Act, Observe, Reflect">
 <rect width="780" height="260" fill="#0d1117"/>
@@ -119,11 +120,11 @@
 
 <p>The promise of agentic AI is compelling: software systems that don't just respond to queries but autonomously plan, execute multi-step tasks, call tools, and adapt in real time. In 2025 and 2026, barely a week passed without a major vendor announcing a new "agent" capability. And yet, for most enterprises, the gap between demo and deployment remains vast.</p>
 
-<p>Industry analysts estimate that roughly <strong>74% of enterprise AI pilot projects fail to reach sustained production</strong> — a figure that applies with particular force to agentic systems, which are inherently more complex than single-inference models. <em>(Industry estimate based on Gartner research; figures are approximate.)</em> The reasons for this failure rate are well-understood in retrospect but rarely anticipated in advance: scope creep, tool reliability, unpredictable failure modes, inadequate observability, and — especially in regulated Israeli industries — compliance blind spots.</p>
+<p>Analysts expect many of these projects to fail. Gartner predicted in 2024 that at least 30% of generative AI projects would be abandoned after proof of concept by the end of 2025 (<a href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener">Gartner</a>), and in 2025 that <strong>over 40% of agentic AI projects will be canceled by the end of 2027</strong> (<a href="https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-predicts-over-40-percent-of-agentic-ai-projects-will-be-canceled-by-end-of-2027" target="_blank" rel="noopener">Gartner</a>). Agentic systems are hit hardest because they are inherently more complex than single-inference models. The reasons for this failure rate are well-understood in retrospect but rarely anticipated in advance: scope creep, tool reliability, unpredictable failure modes, inadequate observability, and — especially in regulated Israeli industries — compliance blind spots.</p>
 
 <p>This article presents a practical framework for taking agentic AI from pilot to production, with specific attention to the constraints and opportunities that define the Israeli enterprise context. We will cover the four production pillars that determine whether an agent deployment succeeds, the Israeli-specific considerations that most vendors overlook, and what to look for in a partner who can navigate all of it.</p>
 
-<div class="ub-stat-callout"><strong>~74%</strong><p>Estimated share of enterprise AI agent pilots that fail to reach sustained production — most stall at integration, compliance, or monitoring gaps.<small>Industry estimate based on Gartner research, 2025</small></p></div>
+<div class="ub-stat-callout"><strong>40%+</strong><p>of agentic AI projects Gartner expects to be canceled by the end of 2027, because of escalating costs, unclear business value or inadequate risk controls.<small>Gartner, June 2025</small></p></div>
 
 <h2>Why Agents Are Different</h2>
 
@@ -171,7 +172,7 @@
 
 <p>Full autonomy is rarely the right production target for a first-generation enterprise agent. The appropriate level of human oversight is not a binary choice but a spectrum, and the right point on that spectrum depends on the action's reversibility, cost, and regulatory context.</p>
 
-<div class="ub-stat-callout"><strong>3×</strong><p>Higher user trust scores observed for enterprise AI agents with explicit human-approval checkpoints versus fully autonomous deployments in the same task category.<small>Industry estimate based on Forrester Research, 2025</small></p></div>
+<div class="ub-stat-callout"><strong>15%</strong><p>of day-to-day work decisions Gartner expects AI agents to make autonomously by 2028.<small>Gartner, June 2025</small></p></div>
 
 <p>Three human-in-the-loop (HITL) patterns are most commonly used in production:</p>
 <ul>
@@ -202,13 +203,13 @@
 
 <p>Enterprise AI deployment is never context-free, and Israel's specific regulatory, linguistic, and talent environment creates constraints that generic frameworks miss. Understanding these is not peripheral — they determine whether a deployment is legally permissible, technically sound, and actually usable by the people who interact with it.</p>
 
-<div class="ub-stat-callout"><strong>~60%</strong><p>Estimated share of mid-to-large Israeli enterprises citing data residency requirements as a primary constraint on their AI deployment architecture choices.<small>IDC Israel estimate, enterprise survey, 2025</small></p></div>
+<div class="ub-stat-callout"><strong>Aug 2025</strong><p>Amendment 13 to Israel's Privacy Protection Law took effect, giving the Privacy Protection Authority the power to impose administrative fines.<small>Library of Congress, Global Legal Monitor</small></p></div>
 
 <h3>Data Residency and Sovereignty</h3>
 
 <p>Many Israeli enterprises operate under data residency requirements that prohibit sending certain data categories to servers outside Israel or outside specific jurisdictions. This creates an architectural constraint that affects every layer of an agent deployment: the model inference endpoint, the memory and retrieval layer, the tool API calls, and the audit logging infrastructure.</p>
 
-<p>The practical implications are significant. If your agent processes health records, financial data, or defense-adjacent information, you may not be able to use a US-hosted LLM API endpoint — even for non-identifying intermediate reasoning. You need either a locally-deployed model (open-weight models such as Llama or Mistral variants are the current standard), a European-hosted API endpoint with appropriate data processing agreements, or a hybrid architecture where sensitive data stays on-premise and only sanitized context crosses the boundary. Each option carries different capability trade-offs and operational complexity costs that must be scoped early, not discovered at deployment.</p>
+<p>The practical implications are significant. If your agent processes health records, financial data, or defense-adjacent information, you may not be able to use a US-hosted LLM API endpoint — even for non-identifying intermediate reasoning. You need either a locally-deployed model (open-weight models such as Llama or Mistral variants are the current standard), an API endpoint hosted in Israel or the EU with appropriate data processing agreements, or a hybrid architecture where sensitive data stays on-premise and only sanitized context crosses the boundary. Each option carries different capability trade-offs and operational complexity costs that must be scoped early, not discovered at deployment.</p>
 
 <h3>Hebrew/English Multilingualism</h3>
 
@@ -218,20 +219,20 @@
 
 <h3>Talent and Operational Realities</h3>
 
-<p>Israel has a world-class pool of AI research talent, but the specific operational skill set required for agentic AI in production — LLM orchestration, RAG pipeline engineering, agent evaluation methodology — is genuinely scarce even here. As we noted in our <a href="https://www.mlaia.com/blog-israel-ai-2026.html">2026 overview of the Israeli AI landscape</a>, there are an estimated 4,200 unfilled AI and data science roles in the country, and the production engineering subset is harder to fill than the research subset.</p>
+<p>Israel has a world-class pool of AI research talent, but the specific operational skill set required for agentic AI in production — LLM orchestration, RAG pipeline engineering, agent evaluation methodology — is genuinely scarce even here. A 2025 Innovation Authority report prepared with the Samuel Neaman Institute counted about 2,434 open AI positions, down from 3,400 in 2023, with data scientists and data engineers making up most of the gap (<a href="https://www.calcalistech.com/ctechnews/article/l6a9cw58j" target="_blank" rel="noopener">Calcalist</a>); see also our <a href="https://www.mlaia.com/blog-israel-ai-2026.html">2026 overview of the Israeli AI landscape</a>. The production engineering subset is harder to fill than the research subset.</p>
 
-<p>This creates a practical consideration for how agent projects are staffed. Building a full in-house capability for agentic AI typically requires 12–18 months of hiring and onboarding, during which the market is moving rapidly. The risk of hiring into a pattern that becomes outdated is real. Many Israeli enterprises are finding that a hybrid model — a small in-house team responsible for product ownership and domain knowledge, augmented by specialized consulting for the engineering and evaluation architecture — delivers faster time to value and more defensible technical decisions than attempting to build everything internally.</p>
+<p>This creates a practical consideration for how agent projects are staffed. Building a full in-house capability for agentic AI typically requires 12–18 months of hiring and onboarding, during which the market is moving rapidly. The risk of hiring into a pattern that becomes outdated is real. Many Israeli enterprises are finding that a hybrid model — a small in-house team responsible for product ownership and domain knowledge, augmented by a specialized outside team for the engineering and evaluation architecture — delivers faster time to value and more defensible technical decisions than attempting to build everything internally.</p>
 
 <h2>What to Look for in an Agentic AI Partner</h2>
 
-<p>The market for AI consulting has expanded rapidly, and the term "agentic AI" now appears on almost every vendor's website. The following criteria distinguish teams with genuine production experience from those with pattern-matched vocabulary:</p>
+<p>The market for agentic AI vendors and partners has expanded rapidly, and the term "agentic AI" now appears on almost every vendor's website. The following criteria distinguish teams with genuine production experience from those with pattern-matched vocabulary:</p>
 
 <ol>
 <li><strong>They start with evaluation, not architecture.</strong> A credible partner's first question is "how will we know if this agent is working?" — not "which framework should we use?" Evaluation methodology (task completion metrics, safety benchmarks, regression suites) is the hardest part of agentic AI and the part most often skipped by teams under delivery pressure.</li>
 <li><strong>They have experience with HITL design specifically.</strong> Designing approval interfaces, escalation flows, and confidence-gated autonomy requires understanding both the technical system and the human workflow it is embedded in. Ask for examples of how they have designed and iterated on the human-in-the-loop components of past deployments.</li>
 <li><strong>They can articulate their observability stack.</strong> Which tracing tools do they use? How do they instrument tool calls? What does a post-incident analysis look like for an agent deployment? Vague answers here indicate a team that has built demos but not maintained production systems.</li>
 <li><strong>They understand Israeli regulatory and linguistic constraints.</strong> Ask directly: have they deployed agents that process data under Israeli data residency requirements? Have they evaluated model performance in Hebrew for your specific task domain? These are not general AI questions; they require specific experience.</li>
-<li><strong>They plan for knowledge transfer.</strong> The goal of a consulting engagement should be to leave your team more capable, not more dependent. What does the handoff look like? What documentation, tooling, and training do they provide so that your engineers can maintain and extend the agent independently?</li>
+<li><strong>They plan for knowledge transfer.</strong> The goal of any outside engagement should be to leave your team more capable, not more dependent. What does the handoff look like? What documentation, tooling, and training do they provide so that your engineers can maintain and extend the agent independently?</li>
 </ol>
 
 <blockquote>
@@ -241,15 +242,15 @@
 <aside class="ub-related" aria-label="Related topics"><p class="ub-related-title">Related topics</p><p>How we apply these pillars: <a href="/langgraph-agents/">LangGraph agents</a> with approval steps, <a href="/aws-bedrock-agents/">AI agents on AWS</a> with least-privilege tools, and <a href="/voice-agents/">voice agents</a>. Overview: <a href="/">Ultrabot, Hebrew &amp; English voice agents</a>.</p></aside>
 <h2>Conclusion</h2>
 
-<p>Agentic AI represents a genuine step-change in what software systems can accomplish — but only when deployed with the rigor the technology demands. The production gap is real, and the majority of enterprises that attempt agent deployments without systematic attention to scope design, tool architecture, human-in-the-loop patterns, and observability will contribute to that ~74% failure statistic.</p>
+<p>Agentic AI represents a genuine step-change in what software systems can accomplish — but only when deployed with the rigor the technology demands. The production gap is real, and the majority of enterprises that attempt agent deployments without systematic attention to scope design, tool architecture, human-in-the-loop patterns, and observability will add to those cancellation statistics.</p>
 
 <p>For Israeli enterprises specifically, the path to production runs through additional constraints: data residency architecture, Hebrew language evaluation, and a talent market where the specific skills needed are even scarcer than the general AI market already suggests. These are solvable problems — but they require partners with the right experience, not just the right vocabulary.</p>
 
-<p>At MLAIA, the team behind Ultrabot, we have built and operated agentic AI systems across Israeli industry — from financial compliance workflows to enterprise knowledge retrieval to customer-facing multilingual support agents. If you are working through an agent deployment challenge, or trying to move a pilot to production, we would be glad to compare notes. <a href="#contact">Reach out to the team.</a></p>
+<p>At MLAIA, the team behind Ultrabot, we build agentic AI systems, including Ultrabot's customer-facing Hebrew &amp; English voice agents. If you are working through an agent deployment challenge, or trying to move a pilot to production, we would be glad to compare notes. <a href="#contact">Reach out to the team.</a></p>
 
 <aside class="ub-cta" aria-label="Talk to us">
   <h2>Ready to move your AI agent from pilot to production?</h2>
-  <p>MLAIA specializes in agentic AI deployment for Israeli enterprises — from scope design through observability, with deep experience in data residency, Hebrew/English multilingualism, and regulated industries.</p>
+  <p>Ultrabot, built by MLAIA, is a Hebrew &amp; English AI voice agent with a face. Talk to it in the <a href="https://talk.mlaia.com/?from=ultrabot.ai" target="_blank" rel="noopener">live demo<span class="ub-sr"> (opens in a new tab)</span></a>, or tell us about the agent you want to ship.</p>
   <p><a class="ub-btn" href="#contact">Talk to the team <span aria-hidden="true">→</span></a></p>
 </aside>
 </article>
