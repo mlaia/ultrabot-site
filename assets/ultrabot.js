@@ -24,10 +24,22 @@
     sub.addEventListener('focusout', e => { if (e.relatedTarget && !sub.contains(e.relatedTarget)) sub.open = false; });
   }
 
-  // Respect reduced motion for the looping avatar clips.
+  // Looping avatar clips and the hero wave: a pause/play button (WCAG 2.2.2), paused from the start under reduced motion.
+  const clips = document.querySelectorAll('video[autoplay]');
+  const motion = document.querySelector('.ub-motion');
+  const setMotion = paused => {
+    document.documentElement.classList.toggle('ub-paused', paused);
+    clips.forEach(v => { if (paused) v.pause(); else { const p = v.play(); if (p) p.catch(() => {}); } });
+    if (motion) {
+      const he = document.documentElement.lang === 'he';
+      motion.textContent = paused ? (he ? 'הפעלת האנימציות' : 'Play animations') : (he ? 'עצירת האנימציות' : 'Pause animations');
+    }
+  };
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('video[autoplay]').forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+    clips.forEach(v => v.removeAttribute('autoplay'));
+    setMotion(true);
   }
+  if (motion) motion.addEventListener('click', () => setMotion(!document.documentElement.classList.contains('ub-paused')));
 
   // Home: "Ask the agent your own question" opens the demo in a new tab with the question pre-filled.
   const ask = document.getElementById('ub-ask');
