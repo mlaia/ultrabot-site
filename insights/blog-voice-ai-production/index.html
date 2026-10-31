@@ -70,7 +70,7 @@
 </div>
 
 <div class="ub-callout" id="quick-answers">
-<strong>Quick answers: choosing speech-to-text</strong>
+<h2 class="ub-callout-title">Quick answers: choosing speech-to-text</h2>
 <h3>Which streaming speech recognition API is most accurate for continuous audio?</h3>
 <p>For English-first streaming, Deepgram Nova-3 is the strongest choice: low word error rate, word-level timestamps and speaker diarization, with words arriving about 200–300 ms after they are spoken. For Hebrew, Arabic or mixed-language audio, Google Speech-to-Text (Chirp models) and Azure Speech are stronger. Accuracy depends on your microphones, accents and vocabulary, so benchmark the candidates on a sample of your own audio before committing.</p>
 <h3>Which speech-to-text options fit a sub-500 ms voice pipeline?</h3>
@@ -96,7 +96,7 @@
 
 <h3>Speech-to-speech: the emerging alternative</h3>
 
-<p>Speech-to-speech (S2S) models — systems like OpenAI's gpt-realtime (<a href="https://openai.com/index/introducing-gpt-realtime/" target="_blank" rel="noopener">generally available since August 2025</a>), Google's native-audio Gemini models, and Kyutai's open <a href="https://github.com/kyutai-labs/moshi" target="_blank" rel="noopener">Moshi</a> — bypass the text representation entirely. They process audio input and generate audio output as a single end-to-end model, theoretically capturing paralinguistic information (tone, emotion, speaking rate, hesitation) that text transcripts discard.</p>
+<p>Speech-to-speech (S2S) models — systems like OpenAI's gpt-realtime (<a href="https://openai.com/index/introducing-gpt-realtime/" target="_blank" rel="noopener">generally available since August 2025<span class="ub-sr"> (opens in a new tab)</span></a>), Google's native-audio Gemini models, and Kyutai's open <a href="https://github.com/kyutai-labs/moshi" target="_blank" rel="noopener">Moshi<span class="ub-sr"> (opens in a new tab)</span></a> — bypass the text representation entirely. They process audio input and generate audio output as a single end-to-end model, theoretically capturing paralinguistic information (tone, emotion, speaking rate, hesitation) that text transcripts discard.</p>
 
 <p>The promise is compelling: sub-200ms response latency, more natural prosody, and the ability to respond to vocal affect rather than just word content. The production reality in 2026 is more nuanced. S2S models are significantly larger and more expensive to serve than cascaded equivalents. They are harder to fine-tune on domain-specific content because there's no text intermediate to adapt. Debugging a failure in an S2S system is substantially harder than debugging a failure in a cascaded pipeline where you can inspect the transcript and text response independently. And hallucination monitoring — critical in regulated applications — requires a text representation that S2S systems don't natively provide.</p>
 
@@ -119,14 +119,14 @@
 <text x="182" y="104" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">speech → text</text>
 
 <line x1="246" y1="90" x2="288" y2="90" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="267" y="80" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">text</text>
+<text x="267" y="80" fill="#94a3b8" font-size="9" font-family="sans-serif" text-anchor="middle">text</text>
 
 <rect x="292" y="62" width="120" height="56" rx="8" fill="#0f172a" stroke="#a78bfa" stroke-width="1.5"/>
 <text x="352" y="86" fill="#a78bfa" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">LLM</text>
 <text x="352" y="104" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">reason + respond</text>
 
 <line x1="416" y1="90" x2="458" y2="90" stroke="#38bdf8" stroke-width="1.5" marker-end="url(#arr)"/>
-<text x="437" y="80" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">text</text>
+<text x="437" y="80" fill="#94a3b8" font-size="9" font-family="sans-serif" text-anchor="middle">text</text>
 
 <rect x="462" y="62" width="120" height="56" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
 <text x="522" y="86" fill="#38bdf8" font-size="14" font-weight="700" font-family="sans-serif" text-anchor="middle">TTS</text>
@@ -138,7 +138,7 @@
 <text x="654" y="94" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">🔊</text>
 <text x="654" y="132" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">audio out</text>
 
-<text x="352" y="152" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif" text-anchor="middle">✓ debuggable text at every stage · ✓ easy domain fine-tuning · ✗ sequential latency</text>
+<text x="352" y="152" fill="#94a3b8" font-size="10" font-style="italic" font-family="sans-serif" text-anchor="middle">✓ debuggable text at every stage · ✓ easy domain fine-tuning · ✗ sequential latency</text>
 
 <!-- divider -->
 <line x1="20" y1="172" x2="680" y2="172" stroke="#1f2937"/>
@@ -164,7 +164,7 @@
 <text x="654" y="259" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">🔊</text>
 <text x="654" y="297" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="middle">audio out</text>
 
-<text x="352" y="312" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif" text-anchor="middle">✓ lowest latency · ✓ preserves tone &amp; emotion · ✗ opaque, costly, hard to fine-tune</text>
+<text x="352" y="312" fill="#94a3b8" font-size="10" font-style="italic" font-family="sans-serif" text-anchor="middle">✓ lowest latency · ✓ preserves tone &amp; emotion · ✗ opaque, costly, hard to fine-tune</text>
 
 <defs>
 <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="#38bdf8" stroke-width="1.2"/></marker>
@@ -225,7 +225,7 @@
 
 <h2 id="latency-budget">2. The Sub-500ms Latency Budget</h2>
 
-<p>Human conversation has a remarkably narrow tolerance window. Cross-language studies of conversation find that the gap between one speaker finishing and the next starting is typically around 200ms, with only small differences between languages (<a href="https://doi.org/10.1073/pnas.0903616106" target="_blank" rel="noopener">Stivers et al., PNAS 2009</a>). As a rule of thumb, voice AI systems can get away with 400–500ms before users consciously register awkward pauses, and up to 700ms before the interaction starts to feel robotic. Beyond 1 second, the experience degrades sharply and callers begin to disengage.</p>
+<p>Human conversation has a remarkably narrow tolerance window. Cross-language studies of conversation find that the gap between one speaker finishing and the next starting is typically around 200ms, with only small differences between languages (<a href="https://doi.org/10.1073/pnas.0903616106" target="_blank" rel="noopener">Stivers et al., PNAS 2009<span class="ub-sr"> (opens in a new tab)</span></a>). As a rule of thumb, voice AI systems can get away with 400–500ms before users consciously register awkward pauses, and up to 700ms before the interaction starts to feel robotic. Beyond 1 second, the experience degrades sharply and callers begin to disengage.</p>
 
 <p>Breaking down a typical cascaded pipeline latency budget (target: 450ms first audio byte):</p>
 
@@ -239,7 +239,7 @@
 </ul>
 
 <figure class="ub-figure ub-figure-dark">
-<div class="ub-figure-scroll" tabindex="0" role="region" aria-label="Diagram, scrolls sideways"><svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stacked bar chart showing the latency budget of a cascaded voice AI pipeline totaling roughly 450 milliseconds">
+<div class="ub-figure-scroll" tabindex="0" role="region" aria-label="Diagram, scrolls sideways"><svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stacked bar chart: latency budget of a cascaded voice AI pipeline, about 450 ms to the first audio byte. Network in 40 ms, VAD endpoint detection 75 ms, STT final segment 55 ms, LLM first token 150 ms (usually the dominant cost), TTS first chunk 90 ms, network out 40 ms. Under 500 ms feels natural, 500 to 700 ms is a noticeable pause, over 1 second users disengage.">
 <text x="20" y="26" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">Anatomy of a 450ms Response</text>
 <text x="680" y="26" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="end">time to first audio byte</text>
 
@@ -265,14 +265,14 @@
 
 <line x1="140" y1="99" x2="140" y2="148" stroke="#334155"/>
 <text x="140" y="162" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">VAD endpoint</text>
-<text x="140" y="175" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">"has the user finished?"</text>
+<text x="140" y="175" fill="#94a3b8" font-size="9" font-family="sans-serif" text-anchor="middle">"has the user finished?"</text>
 
 <line x1="233" y1="99" x2="233" y2="118" stroke="#334155"/>
 <text x="233" y="132" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">STT final segment</text>
 
 <line x1="378" y1="99" x2="378" y2="148" stroke="#334155"/>
 <text x="378" y="162" fill="#a78bfa" font-size="10" font-weight="600" font-family="sans-serif" text-anchor="middle">LLM first token</text>
-<text x="378" y="175" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">usually the dominant cost</text>
+<text x="378" y="175" fill="#94a3b8" font-size="9" font-family="sans-serif" text-anchor="middle">usually the dominant cost</text>
 
 <line x1="549" y1="99" x2="549" y2="118" stroke="#334155"/>
 <text x="549" y="132" fill="#94a3b8" font-size="10" font-family="sans-serif" text-anchor="middle">TTS first chunk</text>
@@ -297,20 +297,20 @@
 
 <h2>3. The Economics: About $0.25 vs $8+ Per Call</h2>
 
-<p>The business case for voice AI in customer service and telephony applications is built on a stark cost differential. Gartner's 2019 survey of customer service leaders put the average cost of a live-channel contact (phone, live chat, email) at $8.01, against about $0.10 for self-service (<a href="https://www.gartner.com/en/newsroom/press-releases/2019-09-25-gartner-says-only-9--of-customers-report-solving-thei" target="_blank" rel="noopener">Gartner</a>). A well-engineered voice AI system handling a routine call costs roughly $0.15–0.30 at current list prices.</p>
+<p>The business case for voice AI in customer service and telephony applications is built on a stark cost differential. Gartner's 2019 survey of customer service leaders put the average cost of a live-channel contact (phone, live chat, email) at $8.01, against about $0.10 for self-service (<a href="https://www.gartner.com/en/newsroom/press-releases/2019-09-25-gartner-says-only-9--of-customers-report-solving-thei" target="_blank" rel="noopener">Gartner<span class="ub-sr"> (opens in a new tab)</span></a>). A well-engineered voice AI system handling a routine call costs roughly $0.15–0.30 at current list prices.</p>
 
 <p>Here is an estimate for a 3-minute automated call in Hebrew or English, with list prices checked in October 2026. Assumptions: the agent speaks about half the call (roughly 225 words, or 1,300 characters), and the conversation has 8 turns, each sending about 3,000 input tokens (system prompt plus history) and receiving about 100 output tokens.</p>
 
 <ul>
-<li><strong>STT (Deepgram Nova-3 streaming, $0.0077/min monolingual or $0.0092/min multilingual, <a href="https://deepgram.com/pricing" target="_blank" rel="noopener">Deepgram pricing</a>):</strong> ~$0.02–0.03</li>
-<li><strong>LLM inference (a small, fast model; e.g. Claude Haiku 4.5 at $1/$5 per million input/output tokens, or Claude Haiku 5.5 at $0.10/$0.50, <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">Anthropic pricing</a>):</strong> ~$0.003–0.03</li>
-<li><strong>TTS (ElevenLabs Eleven v3, which covers Hebrew, at $0.08 per 1,000 characters, <a href="https://elevenlabs.io/pricing/api" target="_blank" rel="noopener">ElevenLabs API pricing</a>):</strong> ~$0.10</li>
-<li><strong>Telephony (e.g. Twilio, $0.0107/min to receive calls on an Israeli local number, <a href="https://www.twilio.com/en-us/voice/pricing/il" target="_blank" rel="noopener">Twilio</a>):</strong> ~$0.03</li>
+<li><strong>STT (Deepgram Nova-3 streaming, $0.0077/min monolingual or $0.0092/min multilingual, <a href="https://deepgram.com/pricing" target="_blank" rel="noopener">Deepgram pricing<span class="ub-sr"> (opens in a new tab)</span></a>):</strong> ~$0.02–0.03</li>
+<li><strong>LLM inference (a small, fast model; e.g. Claude Haiku 4.5 at $1/$5 per million input/output tokens, or Claude Haiku 5.5 at $0.10/$0.50, <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">Anthropic pricing<span class="ub-sr"> (opens in a new tab)</span></a>):</strong> ~$0.003–0.03</li>
+<li><strong>TTS (ElevenLabs Eleven v3, which covers Hebrew, at $0.08 per 1,000 characters, <a href="https://elevenlabs.io/pricing/api" target="_blank" rel="noopener">ElevenLabs API pricing<span class="ub-sr"> (opens in a new tab)</span></a>):</strong> ~$0.10</li>
+<li><strong>Telephony (e.g. Twilio, $0.0107/min to receive calls on an Israeli local number, <a href="https://www.twilio.com/en-us/voice/pricing/il" target="_blank" rel="noopener">Twilio<span class="ub-sr"> (opens in a new tab)</span></a>):</strong> ~$0.03</li>
 <li><strong>Compute and infrastructure overhead (our allowance for orchestration, logging and monitoring):</strong> ~$0.05</li>
 </ul>
 
 <figure class="ub-figure ub-figure-dark">
-<div class="ub-figure-scroll" tabindex="0" role="region" aria-label="Diagram, scrolls sideways"><svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart breaking down the estimated 25 cent cost of an AI-handled call and comparing it to about 8 dollars for a live-agent contact">
+<div class="ub-figure-scroll" tabindex="0" role="region" aria-label="Diagram, scrolls sideways"><svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart: where the estimated $0.25 of a 3-minute automated call goes. TTS $0.10, infrastructure $0.05, telephony $0.03, STT $0.03, LLM up to $0.03. Compared with $8.01 per live-agent contact (Gartner, 2019). TTS choice swings the economics: premium and standard cloud voices differ about 2.7 times in price.">
 <text x="20" y="26" fill="#f1f5f9" font-size="15" font-weight="700" font-family="sans-serif">Where the ~$0.25 Goes</text>
 <text x="680" y="26" fill="#94a3b8" font-size="11" font-family="sans-serif" text-anchor="end">3-minute automated call</text>
 
@@ -335,9 +335,9 @@
 <rect x="130" y="195" width="56" height="22" rx="4" fill="#a78bfa"/>
 <text x="194" y="211" fill="#a78bfa" font-size="12" font-weight="700" font-family="sans-serif">≤$0.03</text>
 
-<text x="540" y="150" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif">TTS choice swings economics:</text>
-<text x="540" y="165" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif">premium vs standard cloud</text>
-<text x="540" y="180" fill="#64748b" font-size="10" font-style="italic" font-family="sans-serif">voices differ ~2.7× in price</text>
+<text x="540" y="150" fill="#94a3b8" font-size="10" font-style="italic" font-family="sans-serif">TTS choice swings economics:</text>
+<text x="540" y="165" fill="#94a3b8" font-size="10" font-style="italic" font-family="sans-serif">premium vs standard cloud</text>
+<text x="540" y="180" fill="#94a3b8" font-size="10" font-style="italic" font-family="sans-serif">voices differ ~2.7× in price</text>
 
 <!-- comparison strip -->
 <line x1="20" y1="235" x2="680" y2="235" stroke="#1f2937"/>
@@ -352,7 +352,7 @@
 <figcaption>Estimated per-call cost at October 2026 list prices, using the assumptions above. TTS is the largest and most variable component.</figcaption>
 </figure>
 
-<p>The total lands at roughly $0.25 with a premium Hebrew-capable voice, and closer to $0.15 with cheaper voices and a very small LLM. TTS is typically the largest single cost component, and also the one with the most variance: ElevenLabs Eleven v3 at $0.08 per 1,000 characters versus Google's Chirp 3 HD voices at about $0.03 per 1,000 (<a href="https://cloud.google.com/text-to-speech/pricing" target="_blank" rel="noopener">Google Cloud pricing</a>) is a 2.7× difference in TTS cost alone. The LLM, by contrast, has become a small line item for short turns on a small model. The right TTS choice is a function of voice quality requirements, language coverage and call volume.</p>
+<p>The total lands at roughly $0.25 with a premium Hebrew-capable voice, and closer to $0.15 with cheaper voices and a very small LLM. TTS is typically the largest single cost component, and also the one with the most variance: ElevenLabs Eleven v3 at $0.08 per 1,000 characters versus Google's Chirp 3 HD voices at about $0.03 per 1,000 (<a href="https://cloud.google.com/text-to-speech/pricing" target="_blank" rel="noopener">Google Cloud pricing<span class="ub-sr"> (opens in a new tab)</span></a>) is a 2.7× difference in TTS cost alone. The LLM, by contrast, has become a small line item for short turns on a small model. The right TTS choice is a function of voice quality requirements, language coverage and call volume.</p>
 
 <p>One important caveat: the 95th percentile of calls handled by AI is not the same as the 95th percentile of calls that humans handle. Voice AI systems today still struggle with highly ambiguous requests, strong emotional states, and multi-party scenarios. The practical model is a hybrid: AI handles the routine, well-structured interactions; human agents handle the tail. The effective per-interaction cost for the hybrid model is substantially lower than pure-human, even though the AI portion isn't fully autonomous.</p>
 
@@ -361,13 +361,13 @@
 <p>Speech-to-text has seen more competitive disruption in the past two years than any other component of the voice AI stack. OpenAI's Whisper — released as open weights — established a new benchmark for accuracy and multilingual coverage, and the derivative ecosystem (Faster-Whisper, WhisperX, Distil-Whisper) has made high-quality ASR deployable on commodity hardware. At the same time, commercial STT providers have responded with models that significantly outperform vanilla Whisper on real-time streaming, speaker diarization, and domain-specific vocabulary.</p>
 
 <h3>Whisper and its derivatives</h3>
-<p>OpenAI's Whisper large-v3 remains a strong baseline for offline and near-realtime transcription, particularly for languages beyond English. The open-weights model runs on a single A10G GPU and handles most European and Middle Eastern languages including Hebrew with reasonable accuracy. Faster-Whisper (CTranslate2 backend) is up to 4× faster than the original implementation at the same accuracy (<a href="https://github.com/SYSTRAN/faster-whisper" target="_blank" rel="noopener">faster-whisper</a>) — this is the go-to for on-prem deployment where controlling costs and data residency matters. Distil-Whisper large-v3 is about 6.3× faster than large-v3 and stays within about 1.5% WER on short-form audio (<a href="https://huggingface.co/distil-whisper/distil-large-v3" target="_blank" rel="noopener">model card</a>), but it is English-only, so it does not help with Hebrew.</p>
+<p>OpenAI's Whisper large-v3 remains a strong baseline for offline and near-realtime transcription, particularly for languages beyond English. The open-weights model runs on a single A10G GPU and handles most European and Middle Eastern languages including Hebrew with reasonable accuracy. Faster-Whisper (CTranslate2 backend) is up to 4× faster than the original implementation at the same accuracy (<a href="https://github.com/SYSTRAN/faster-whisper" target="_blank" rel="noopener">faster-whisper<span class="ub-sr"> (opens in a new tab)</span></a>) — this is the go-to for on-prem deployment where controlling costs and data residency matters. Distil-Whisper large-v3 is about 6.3× faster than large-v3 and stays within about 1.5% WER on short-form audio (<a href="https://huggingface.co/distil-whisper/distil-large-v3" target="_blank" rel="noopener">model card<span class="ub-sr"> (opens in a new tab)</span></a>), but it is English-only, so it does not help with Hebrew.</p>
 
 <h3>Deepgram Nova-3</h3>
 <p>Deepgram's Nova-3 is consistently the strongest choice for English-first production applications where streaming latency is the primary constraint. Nova-3 delivers word-level timestamps, real-time partial transcripts with low word error rate, and purpose-built speaker diarization, at $0.0077/minute for monolingual streaming ($0.0092 multilingual; $0.0043 for pre-recorded audio). Its streaming latency (time from word spoken to word in transcript) runs approximately 200–300ms in production, which is lower than Whisper streaming variants. The tradeoff is multilingual support: Nova-3's Hebrew and Arabic accuracy lags behind English by a meaningful margin.</p>
 
 <h3>Google Speech-to-Text v2 and Azure Speech</h3>
-<p>Google's STT v2 and Azure Cognitive Services Speech both offer strong multilingual coverage including Hebrew, Arabic, and code-switching between them. Both provide streaming APIs with competitive latency and built-in telephony integrations (8kHz G.711 support without upsampling). For deployments that are already cloud-committed to GCP or Azure, the native integrations simplify infrastructure. Google's newer chirp_3 model, in public preview since August 2025, lists Hebrew among its preview languages (<a href="https://docs.cloud.google.com/speech-to-text/docs/models/chirp-3" target="_blank" rel="noopener">Google Cloud docs</a>); check its current launch stage, and whether features such as diarization cover Hebrew, before committing.</p>
+<p>Google's STT v2 and Azure Cognitive Services Speech both offer strong multilingual coverage including Hebrew, Arabic, and code-switching between them. Both provide streaming APIs with competitive latency and built-in telephony integrations (8kHz G.711 support without upsampling). For deployments that are already cloud-committed to GCP or Azure, the native integrations simplify infrastructure. Google's newer chirp_3 model, in public preview since August 2025, lists Hebrew among its preview languages (<a href="https://docs.cloud.google.com/speech-to-text/docs/models/chirp-3" target="_blank" rel="noopener">Google Cloud docs<span class="ub-sr"> (opens in a new tab)</span></a>); check its current launch stage, and whether features such as diarization cover Hebrew, before committing.</p>
 
 <div class="ub-callout">
 <strong>On-Prem STT Considerations:</strong> For Israeli defense, healthcare, and regulated financial deployments where no audio can transit the public internet, the self-hosted path is Faster-Whisper large-v3 on an on-prem GPU or a bare-metal cloud instance with data residency guarantees. The model runs comfortably on a 24GB GPU such as an NVIDIA A10G; benchmark how many concurrent real-time streams it sustains with your audio and settings. For Hebrew-specific production use, a fine-tuned Whisper variant trained on Israeli telephone speech data substantially outperforms the base multilingual model.
@@ -378,13 +378,13 @@
 <p>Israel has a disproportionately large voice AI ecosystem relative to its market size, driven by a combination of strong NLP research (Hebrew is a morphologically complex language that generated significant academic work), defense and intelligence applications that pushed voice recognition development decades before the commercial market, and a dense startup culture in the audio and speech space.</p>
 
 <h3>Verbit</h3>
-<p>Verbit is the most prominent Israeli company operating at the intersection of voice AI and transcription, with a focus on the legal, education, and media verticals. Its hybrid AI-plus-human correction model has been its commercial differentiator — AI handles the bulk transcription, human specialists handle the accuracy-critical corrections. Its funding passed $550M with its 2021 Series E, a figure that includes secondary transactions (<a href="https://techcrunch.com/2021/11/23/verbit-lands-250m-series-e-at-a-2b-valuation-to-double-down-on-its-acquisition-strategy/" target="_blank" rel="noopener">TechCrunch</a>). For enterprises evaluating transcription infrastructure, Verbit's API is worth assessing against Deepgram and Rev.ai for accuracy on accented or domain-specific speech.</p>
+<p>Verbit is the most prominent Israeli company operating at the intersection of voice AI and transcription, with a focus on the legal, education, and media verticals. Its hybrid AI-plus-human correction model has been its commercial differentiator — AI handles the bulk transcription, human specialists handle the accuracy-critical corrections. Its funding passed $550M with its 2021 Series E, a figure that includes secondary transactions (<a href="https://techcrunch.com/2021/11/23/verbit-lands-250m-series-e-at-a-2b-valuation-to-double-down-on-its-acquisition-strategy/" target="_blank" rel="noopener">TechCrunch<span class="ub-sr"> (opens in a new tab)</span></a>). For enterprises evaluating transcription infrastructure, Verbit's API is worth assessing against Deepgram and Rev.ai for accuracy on accented or domain-specific speech.</p>
 
 <h3>Hyro</h3>
 <p>Hyro builds conversational AI for healthcare, specifically targeting patient-facing voice interactions in hospital and clinic settings. Its architecture is domain-specific: rather than a general LLM, Hyro uses a hybrid approach with a knowledge graph representing the healthcare facility's specific information (department locations, appointment types, provider availability) combined with NLP for intent classification. This makes it significantly more accurate and hallucination-resistant for its target domain than a general-purpose LLM-based voice agent, at the cost of requiring structured knowledge ingestion. Active in Israel and the US healthcare market.</p>
 
 <h3>Hi Auto</h3>
-<p>Hi Auto focuses on drive-through and quick-service restaurant (QSR) voice AI — one of the most demanding acoustic environments for speech recognition due to background noise, multiple simultaneous speakers, and the need for near-perfect order accuracy. Its system is deployed at US chains including Bojangles and Checkers &amp; Rally's (<a href="https://nocamels.com/2024/07/us-eatery-expands-use-of-israeli-ai-voice-tech-at-drive-thru-stations/" target="_blank" rel="noopener">NoCamels</a>), and its acoustic preprocessing pipeline for high-noise environments is a notable engineering differentiator. For any voice AI application in challenging acoustic environments (factory floors, open-plan offices, outdoor settings), Hi Auto's acoustic preprocessing approach is a useful reference architecture.</p>
+<p>Hi Auto focuses on drive-through and quick-service restaurant (QSR) voice AI — one of the most demanding acoustic environments for speech recognition due to background noise, multiple simultaneous speakers, and the need for near-perfect order accuracy. Its system is deployed at US chains including Bojangles and Checkers &amp; Rally's (<a href="https://nocamels.com/2024/07/us-eatery-expands-use-of-israeli-ai-voice-tech-at-drive-thru-stations/" target="_blank" rel="noopener">NoCamels<span class="ub-sr"> (opens in a new tab)</span></a>), and its acoustic preprocessing pipeline for high-noise environments is a notable engineering differentiator. For any voice AI application in challenging acoustic environments (factory floors, open-plan offices, outdoor settings), Hi Auto's acoustic preprocessing approach is a useful reference architecture.</p>
 
 <h3>Voiceitt</h3>
 <p>Voiceitt works at the intersection of voice AI and accessibility, focusing specifically on users with non-standard speech patterns — people with ALS, cerebral palsy, stroke survivors, and others whose speech deviates significantly from the training distribution of standard STT models. The company's approach of training personalized acoustic models on small amounts of user-specific audio is a technically interesting counterpoint to the trend toward large universal models. For any voice AI application targeting accessibility or serving user populations with diverse speech patterns, Voiceitt's personalization architecture is worth studying.</p>
@@ -400,7 +400,7 @@
 <p>Hebrew is a root-and-pattern morphological system where prefixes, suffixes, and infixes carry grammatical meaning that is critical for semantic interpretation. The word "מהבנק" (from the bank) contains a preposition, a definite article, and a noun fused into a single orthographic unit. STT models that operate at the word level rather than the morpheme level lose this information. For downstream intent classification and entity extraction tasks, morphological segmentation as a post-processing step significantly improves accuracy compared to treating Hebrew words as atomic tokens.</p>
 
 <h3>TTS quality for Hebrew</h3>
-<p>Naturalness in Hebrew TTS still lags English noticeably. Standard cloud Hebrew neural voices (for example Google's and Azure's) are intelligible but often not conversational — they sound formal and slightly robotic compared to equivalent English models. ElevenLabs' Eleven v3 model, released in 2025, lists Hebrew among its supported languages (<a href="https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support" target="_blank" rel="noopener">ElevenLabs</a>), and its Hebrew voices represent the current state of the art for naturalness, though at higher cost. For production deployments where voice quality is a significant user experience factor, voice cloning with a custom Hebrew voice actor recording roughly 2–4 hours of prompted speech is a viable path using current voice cloning technology. The resulting custom voice substantially outperforms off-the-shelf Hebrew TTS on naturalness metrics.</p>
+<p>Naturalness in Hebrew TTS still lags English noticeably. Standard cloud Hebrew neural voices (for example Google's and Azure's) are intelligible but often not conversational — they sound formal and slightly robotic compared to equivalent English models. ElevenLabs' Eleven v3 model, released in 2025, lists Hebrew among its supported languages (<a href="https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support" target="_blank" rel="noopener">ElevenLabs<span class="ub-sr"> (opens in a new tab)</span></a>), and its Hebrew voices represent the current state of the art for naturalness, though at higher cost. For production deployments where voice quality is a significant user experience factor, voice cloning with a custom Hebrew voice actor recording roughly 2–4 hours of prompted speech is a viable path using current voice cloning technology. The resulting custom voice substantially outperforms off-the-shelf Hebrew TTS on naturalness metrics.</p>
 
 <h3>Right-to-left considerations in integration</h3>
 <p>This seems obvious but is frequently missed: any system component that logs, displays, or processes Hebrew text must handle right-to-left text direction. This includes logging infrastructure, transcript viewers, quality review interfaces, and any customer-facing text that includes Hebrew. The failure mode — Hebrew characters displayed in the wrong order or mixed with LTR content incorrectly — creates confusing transcripts that impede human review of AI behavior. UTF-8 encoding is universal in modern infrastructure, but RTL rendering support is not universally tested.</p>
@@ -500,7 +500,7 @@
     </nav>
     <div>
       <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
-      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="https://www.mlaia.com/accessibility.html">Accessibility</a></p>
+      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="/accessibility/">Accessibility statement</a></p>
       <p>© 2026 MLAIA Data Science · Israel</p>
     </div>
   </div>

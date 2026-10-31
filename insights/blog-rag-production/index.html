@@ -58,7 +58,7 @@
 <h1>Enterprise RAG That Ships: The Five Failure Modes That Kill Pilots — and a 90-Day Plan to Production</h1>
 <p class="ub-meta"><time datetime="2026-08-23">August 23, 2026</time> · 8 min read · By Dr. Yochai Edlitz, Founder &amp; CEO, MLAIA</p>
 <p class="ub-meta ub-updated">Updated <time datetime="2026-10-30">October 2026</time></p>
-<p>Retrieval-augmented generation has crossed the chasm. In Menlo Ventures' 2024 survey of 600 US enterprise IT decision-makers, RAG was the dominant design pattern, used in 51% of enterprise generative AI deployments, up from 31% a year earlier (<a href="https://menlovc.com/2024-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noopener">Menlo Ventures</a>). The same year, Gartner predicted that at least 30% of generative AI projects would be abandoned after proof of concept by the end of 2025, citing poor data quality, inadequate risk controls, escalating costs or unclear business value (<a href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener">Gartner</a>).</p>
+<p>Retrieval-augmented generation has crossed the chasm. In Menlo Ventures' 2024 survey of 600 US enterprise IT decision-makers, RAG was the dominant design pattern, used in 51% of enterprise generative AI deployments, up from 31% a year earlier (<a href="https://menlovc.com/2024-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noopener">Menlo Ventures<span class="ub-sr"> (opens in a new tab)</span></a>). The same year, Gartner predicted that at least 30% of generative AI projects would be abandoned after proof of concept by the end of 2025, citing poor data quality, inadequate risk controls, escalating costs or unclear business value (<a href="https://www.gartner.com/en/newsroom/press-releases/2024-07-29-gartner-predicts-30-percent-of-generative-ai-projects-will-be-abandoned-after-proof-of-concept-by-end-of-2025" target="_blank" rel="noopener">Gartner<span class="ub-sr"> (opens in a new tab)</span></a>).</p>
 
 <p>Adoption figures describe the winners. What they hide is the large population of RAG pilots that impressed everyone in the demo and then quietly died before reaching real users. The failure pattern repeats across industries. The model is rarely the problem. The system around it is.</p>
 
@@ -80,7 +80,7 @@
 "The uncomfortable truth about enterprise RAG is that the language model is the most reliable component in the system. Retrieval quality, data freshness, and evaluation discipline — not the model — determine whether a pilot ever survives contact with real users."
 </blockquote>
 
-<p>Enterprise spend reflects how high the stakes have become: Menlo Ventures put enterprise generative AI spending at $13.8 billion in 2024, more than six times the 2023 figure (<a href="https://menlovc.com/2024-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noopener">Menlo Ventures</a>), and budgets have kept growing since. With that kind of budget on the table, "it usually gives good answers" is no longer an acceptable engineering standard.</p>
+<p>Enterprise spend reflects how high the stakes have become: Menlo Ventures put enterprise generative AI spending at $13.8 billion in 2024, more than six times the 2023 figure (<a href="https://menlovc.com/2024-the-state-of-generative-ai-in-the-enterprise/" target="_blank" rel="noopener">Menlo Ventures<span class="ub-sr"> (opens in a new tab)</span></a>), and budgets have kept growing since. With that kind of budget on the table, "it usually gives good answers" is no longer an acceptable engineering standard.</p>
 
 <h2>Failure Mode 1: Retrieval Is Treated as a Solved Problem</h2>
 
@@ -118,7 +118,7 @@
 
 <h2>Failure Mode 4: Security and Permissions Are Bolted On Last</h2>
 
-<p>An enterprise RAG system is, by construction, a search engine over your most sensitive internal documents. If document-level permissions are not enforced at retrieval time, the system will happily summarize the executive compensation file for any employee who asks nicely. Security researchers now track RAG-specific attack classes — prompt injection through poisoned documents, embedding inversion, cross-tenant leakage — and the OWASP Top 10 for LLM applications lists them under <a href="https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/" target="_blank" rel="noopener">vector and embedding weaknesses</a>.</p>
+<p>An enterprise RAG system is, by construction, a search engine over your most sensitive internal documents. If document-level permissions are not enforced at retrieval time, the system will happily summarize the executive compensation file for any employee who asks nicely. Security researchers now track RAG-specific attack classes — prompt injection through poisoned documents, embedding inversion, cross-tenant leakage — and the OWASP Top 10 for LLM applications lists them under <a href="https://genai.owasp.org/llmrisk/llm082025-vector-and-embedding-weaknesses/" target="_blank" rel="noopener">vector and embedding weaknesses<span class="ub-sr"> (opens in a new tab)</span></a>.</p>
 
 <div class="ub-callout warn">
 <strong>The architectural rule:</strong> access control lists must be enforced inside the retrieval layer, per query, per user — never in the UI. For Israeli companies working in defense, healthcare, or finance, where regulatory exposure is significant, this is frequently the difference between a system that passes security review and a pilot that gets frozen indefinitely.
@@ -132,7 +132,7 @@
 
 <h2>The Israeli Context: Small Teams, High Stakes</h2>
 
-<p>The local ecosystem sharpens all of this. Israeli tech companies raised $7.6 billion in the first half of 2026, up 52% year over year (<a href="https://en.globes.co.il/en/article-1001547660" target="_blank" rel="noopener">Globes, IVC-LeumiTech data</a>), and AI-native companies compete hard for the same scarce engineers. Most Israeli enterprises simply cannot hire a five-person applied ML team to babysit an internal RAG system.</p>
+<p>The local ecosystem sharpens all of this. Israeli tech companies raised $7.6 billion in the first half of 2026, up 52% year over year (<a href="https://en.globes.co.il/en/article-1001547660" target="_blank" rel="noopener">Globes, IVC-LeumiTech data<span class="ub-sr"> (opens in a new tab)</span></a>), and AI-native companies compete hard for the same scarce engineers. Most Israeli enterprises simply cannot hire a five-person applied ML team to babysit an internal RAG system.</p>
 
 <blockquote>
 "In a market where AI talent is scarce, the winning strategy for most Israeli enterprises is not building a large in-house ML team — it is building lean systems with strong evaluation discipline, often with an experienced partner who has already made the expensive mistakes elsewhere."
@@ -206,7 +206,7 @@
     </nav>
     <div>
       <p><a href="mailto:yochai@mlaia.com">yochai@mlaia.com</a></p>
-      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="https://www.mlaia.com/accessibility.html">Accessibility</a></p>
+      <p><a href="https://www.mlaia.com/privacy.html">Privacy</a> · <a href="/accessibility/">Accessibility statement</a></p>
       <p>© 2026 MLAIA Data Science · Israel</p>
     </div>
   </div>
