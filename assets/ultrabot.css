@@ -287,6 +287,8 @@ html[dir=rtl] input[type=email],html[dir=rtl] a[href^="mailto:"],html[dir=rtl] a
 /* he page: RTL fixes for /he/ (append-only; keep separate from other page blocks) */
 @media(max-width:960px){
   html[dir=rtl] .ub-nav .ub-has-sub ul{padding:0 14px 0 0}
+}
+
 /* insights: article building blocks for /insights/<slug>/ and the /insights/ listing */
 .ub-article .ub-lede{font-size:21px;line-height:1.6;color:var(--ub-quiet)}
 .ub-article hr{border:0;border-top:1px solid var(--ub-line);margin:44px 0}

@@ -19,6 +19,7 @@
 - [LangGraph agents](https://ultrabot.ai/langgraph-agents/): typed state, tool calling with limits, human approval steps, retries, tracing and step-level evaluation.
 - [n8n automation](https://ultrabot.ai/n8n-automation/): workflows that connect forms, email, CRM and documents, with validated AI output, approvals and self-hosting.
 - [Hebrew: צ'אט בוט וסוכן קולי AI לעסקים](https://ultrabot.ai/he/)
+- [Hebrew: סוכנים קוליים](https://ultrabot.ai/he/voice-agents/) and [אווטארים מדברים](https://ultrabot.ai/he/avatars/)
 
 ## Insights
 
