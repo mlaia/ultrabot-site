@@ -33,6 +33,10 @@
 - [Sovereign AI on-prem in Israel](https://ultrabot.ai/insights/blog-sovereign-ai-onprem/)
 - [Small language models on-prem](https://ultrabot.ai/insights/blog-slm-onprem-israel/)
 
+## About
+
+- [Accessibility statement](https://ultrabot.ai/accessibility/)
+
 ## Related
 
 - MLAIA Data Science, the applied AI firm behind Ultrabot (audio, medical AI and forecasting): https://www.mlaia.com/
