@@ -78,7 +78,7 @@
   }
 
   // Analytics: GA4 loads only after the visitor accepts. Until GA_ID is set, no banner and no tracking.
-  const GA_ID = ''; // TODO: the Ultrabot GA4 measurement ID (G-…), from the visibility session
+  const GA_ID = 'G-HGBCSH2PBP'; // Ultrabot GA4 property (account 414249928, property 561722932)
   const KEY = 'ultrabot-cookie-consent';
   const he = document.documentElement.lang === 'he';
   const saved = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
