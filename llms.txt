@@ -35,7 +35,7 @@
 
 ## About
 
-- [Accessibility statement](https://ultrabot.ai/accessibility/)
+- [Accessibility statement](https://ultrabot.ai/accessibility/) ([Hebrew](https://ultrabot.ai/he/accessibility/))
 
 ## Related
 

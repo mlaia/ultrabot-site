@@ -18,5 +18,6 @@
   <url><loc>https://ultrabot.ai/insights/blog-slm-onprem-israel/</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://ultrabot.ai/insights/agentic-ai-production-gap/</loc><lastmod>2026-10-30</lastmod></url>
   <url><loc>https://ultrabot.ai/insights/llms-in-production/</loc><lastmod>2026-10-30</lastmod></url>
-  <url><loc>https://ultrabot.ai/accessibility/</loc><lastmod>2026-10-31</lastmod></url>
+  <url><loc>https://ultrabot.ai/accessibility/</loc><lastmod>2026-10-31</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/accessibility/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/accessibility/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/accessibility/"/></url>
+  <url><loc>https://ultrabot.ai/he/accessibility/</loc><lastmod>2026-10-31</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://ultrabot.ai/accessibility/"/><xhtml:link rel="alternate" hreflang="he" href="https://ultrabot.ai/he/accessibility/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ultrabot.ai/accessibility/"/></url>
 </urlset>
