@@ -62,6 +62,7 @@ p{text-wrap:pretty}
 .ub-section.white{background:#fff}
 .ub-section h2{font-family:var(--ub-display);font-weight:800;font-size:clamp(32px,3.6vw,50px);line-height:1.06;letter-spacing:-.035em;margin:0 0 20px;max-width:900px}
 .ub-section-lead{font-size:19px;color:var(--ub-quiet);max-width:740px;margin:0 0 36px}
+.ub-subhead{font-family:var(--ub-display);font-weight:800;font-size:clamp(22px,2.2vw,28px);letter-spacing:-.02em;margin:56px 0 12px}
 .ub-section-lead a,.ub-note a,.ub-service p a{color:var(--ub-blue)}
 
 /* Home hero: the live demo */

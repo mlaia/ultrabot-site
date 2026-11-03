@@ -39,12 +39,17 @@
     <button class="ub-menu" type="button" aria-expanded="false" aria-controls="ub-nav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>תפריט</button>
     <nav class="ub-nav" id="ub-nav" aria-label="ראשי">
       <ul>
+        <li class="ub-has-sub"><details><summary>פתרונות</summary><ul>
+          <li><a href="/he/chatbots/">צ'אט בוט לאתר ולוואטסאפ</a></li>
+          <li><a href="/he/knowledge-assistant/">עוזר ידע ארגוני</a></li>
+          <li><a href="/he/in-app-assistants/">עוזר AI באפליקציה</a></li>
+          <li><a href="/n8n-automation/" hreflang="en">אוטומציה עם n8n</a></li>
+        </ul></details></li>
         <li><a href="/he/voice-agents/">סוכנים קוליים</a></li>
         <li><a href="/he/avatars/">אווטארים</a></li>
         <li class="ub-has-sub"><details><summary>פלטפורמות</summary><ul>
           <li><a href="/aws-bedrock-agents/" hreflang="en">סוכנים על <span lang="en">AWS Bedrock</span></a></li>
           <li><a href="/langgraph-agents/" hreflang="en">סוכנים ב-LangGraph</a></li>
-          <li><a href="/n8n-automation/" hreflang="en">אוטומציה עם n8n</a></li>
         </ul></details></li>
         <li><a href="/insights/" hreflang="en">מאמרים</a></li>
         <li><a href="/" lang="en" hreflang="en">English</a></li>
@@ -145,8 +150,15 @@
 <section class="ub-section white" id="topics" aria-labelledby="topics-h">
   <div class="ub-wrap">
     <p class="ub-eyebrow">מה אנחנו בונים</p>
-    <h2 id="topics-h">להעמיק בנושא מסוים.</h2>
-    <p class="ub-section-lead">כל עמוד מסביר איך אנחנו בונים, מה אנחנו מודדים ומה כדאי לסגור לפני שמתחילים. עמודי הפלטפורמות כתובים באנגלית.</p>
+    <h2 id="topics-h">איפה העוזר<br>שלכם עובד.</h2>
+    <p class="ub-section-lead">שלושה סוגי עוזרים, שנבנים באותה דרך: על המידע שלכם, נמדדים לפני ההשקה, ואנשים מחליטים.</p>
+    <div class="ub-grid">
+      <a class="ub-service ub-card-link" href="/he/chatbots/"><h3>צ'אט בוט לאתר ולוואטסאפ</h3><p>עונה ללקוחות מתוך האתר והמסמכים שלכם, עם מקור, מכניס לידים ל-CRM ומעביר לנציג כשצריך.</p><span class="ub-more">לעמוד הצ'אט בוט <span aria-hidden="true">←</span></span></a>
+      <a class="ub-service ub-card-link" href="/he/knowledge-assistant/"><h3>עוזר ידע ארגוני (RAG)</h3><p>עונה לעובדים מתוך הנהלים, המדיניות והחוזים, עם מקור ולפי ההרשאות, בענן שלכם או בשרתים שלכם.</p><span class="ub-more">לעמוד עוזר הידע <span aria-hidden="true">←</span></span></a>
+      <a class="ub-service ub-card-link" href="/he/in-app-assistants/"><h3>עוזר AI באפליקציה</h3><p>עוזר בתוך אפליקציית הווב או המובייל שלכם, שעונה מנתוני המוצר ופועל דרך ה-API שלכם, בכתב או בקול.</p><span class="ub-more">לעמוד העוזר באפליקציה <span aria-hidden="true">←</span></span></a>
+    </div>
+    <h3 class="ub-subhead">השכבות שמתחת לכל עוזר</h3>
+    <p class="ub-section-lead">מה שמוסיפים כשהעוזר צריך לפעול, לדבר או לרוץ בענן שלכם. כל עמוד מסביר איך אנחנו בונים ומה אנחנו מודדים. עמודי הפלטפורמות כתובים באנגלית.</p>
     <div class="ub-grid">
       <a class="ub-service ub-card-link" href="/he/voice-agents/"><h3>סוכנים קוליים</h3><p>תמלול בזמן אמת, סוכן עם כלים וקולות טבעיים. מכוונים לזמן תגובה, להפרעות ולעברית, באתר או בטלפון.</p><span class="ub-more">לעמוד הסוכנים הקוליים <span aria-hidden="true">←</span></span></a>
       <a class="ub-service ub-card-link" href="/he/avatars/"><h3>אווטארים מדברים</h3><p>פנים שמסונכרנות לקול של הסוכן, מצוירות בדפדפן או באפליקציה, או וידאו מציאותי בסטרימינג.</p><span class="ub-more">לעמוד האווטארים <span aria-hidden="true">←</span></span></a>
@@ -188,11 +200,14 @@
   <div class="ub-wrap ub-footer-inner">
     <div>
       <a class="ub-logo" href="/he/">Ultra<span>bot</span></a>
-      <p>צ'אט בוטים וסוכנים קוליים עם פנים, בעברית ובאנגלית.</p>
+      <p>עוזרי AI בעברית ובאנגלית: צ'אט, קול ופנים.</p>
       <p class="ub-built">נבנה על ידי <a href="https://www.mlaia.com/audio-ai/"><span lang="en">MLAIA Data Science</span></a></p>
     </div>
     <nav aria-label="תחתון">
       <ul>
+        <li><a href="/he/chatbots/">צ'אט בוט לאתר ולוואטסאפ</a></li>
+        <li><a href="/he/knowledge-assistant/">עוזר ידע ארגוני</a></li>
+        <li><a href="/he/in-app-assistants/">עוזר AI באפליקציה</a></li>
         <li><a href="/he/voice-agents/">סוכנים קוליים</a></li>
         <li><a href="/he/avatars/">אווטארים</a></li>
         <li><a href="/aws-bedrock-agents/" hreflang="en">סוכנים על AWS Bedrock</a></li>

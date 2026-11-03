@@ -1,6 +1,6 @@
 # Ultrabot
 
-> Ultrabot builds AI voice agents with a talking face, in Hebrew and English: agents that answer from your documents with sources, act in your CRM and tools with approval, and speak on the web or the phone. Ultrabot is a product of MLAIA Data Science (https://www.mlaia.com/), led by Dr. Yochai Edlitz.
+> Ultrabot builds AI assistants for websites, organisations and apps, in Hebrew and English, by text, voice or a talking face: website and WhatsApp chatbots, internal knowledge assistants (RAG) that answer from your documents with sources, in-app assistants that act through your API, and n8n automations with approval steps. Ultrabot is a product of MLAIA Data Science (https://www.mlaia.com/), led by Dr. Yochai Edlitz.
 
 ## Company
 
@@ -13,12 +13,16 @@
 
 ## What we build
 
+- [Website & WhatsApp chatbots](https://ultrabot.ai/chatbots/): answers customers from your site and documents with sources, captures leads into your CRM, books meetings and hands off to a person.
+- [Knowledge assistants (RAG)](https://ultrabot.ai/knowledge-assistant/): an internal assistant that answers staff from policies, procedures and contracts, with sources, permissions, evaluation, and AWS or on-prem hosting.
+- [In-app assistants](https://ultrabot.ai/in-app-assistants/): assistants inside web and mobile apps that answer from product data and act through your API, by text, voice or avatar.
 - [AI voice agents](https://ultrabot.ai/voice-agents/): streaming speech-to-text, an LLM with tools and natural speech, with low delay, barge-in, Hebrew support and phone integration.
 - [Talking AI avatars](https://ultrabot.ai/avatars/): lip-synced faces driven by the agent's voice, from lightweight browser avatars to photoreal video.
 - [AWS Bedrock agents](https://ultrabot.ai/aws-bedrock-agents/): agents inside your AWS account, with Guardrails, AgentCore, Lambda tools and least-privilege roles.
 - [LangGraph agents](https://ultrabot.ai/langgraph-agents/): typed state, tool calling with limits, human approval steps, retries, tracing and step-level evaluation.
 - [n8n automation](https://ultrabot.ai/n8n-automation/): workflows that connect forms, email, CRM and documents, with validated AI output, approvals and self-hosting.
 - [Hebrew: צ'אט בוט וסוכן קולי AI לעסקים](https://ultrabot.ai/he/)
+- [Hebrew: צ'אט בוט לאתר ולוואטסאפ](https://ultrabot.ai/he/chatbots/), [עוזר ידע ארגוני](https://ultrabot.ai/he/knowledge-assistant/) and [עוזר AI באפליקציה](https://ultrabot.ai/he/in-app-assistants/)
 - [Hebrew: סוכנים קוליים](https://ultrabot.ai/he/voice-agents/) and [אווטארים מדברים](https://ultrabot.ai/he/avatars/)
 
 ## Insights

@@ -1,9 +1,9 @@
-/* Ultrabot: mobile menu, Platforms submenu, contact form and the home "ask" box. No analytics. */
+/* Ultrabot: mobile menu, Solutions and Platforms submenus, contact form and the home "ask" box. No analytics. */
 (() => {
   'use strict';
   const menu = document.querySelector('.ub-menu');
   const nav = document.getElementById('ub-nav');
-  const sub = document.querySelector('.ub-has-sub details');
+  const subs = [...document.querySelectorAll('.ub-has-sub details')];
 
   if (menu && nav) {
     const close = () => { nav.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); };
@@ -14,15 +14,17 @@
     nav.addEventListener('click', e => { if (e.target.closest('a')) close(); });
     document.addEventListener('keydown', e => {
       if (e.key !== 'Escape') return;
-      if (sub && sub.open) { sub.open = false; sub.querySelector('summary').focus(); return; }
+      const sub = subs.find(d => d.open);
+      if (sub) { sub.open = false; sub.querySelector('summary').focus(); return; }
       if (nav.classList.contains('open')) { close(); menu.focus(); }
     });
   }
-  // Close the Platforms submenu when clicking or tabbing elsewhere.
-  if (sub) {
+  // A submenu closes when clicking or tabbing elsewhere, and opening one closes the other.
+  subs.forEach(sub => {
     document.addEventListener('click', e => { if (!sub.contains(e.target)) sub.open = false; });
     sub.addEventListener('focusout', e => { if (e.relatedTarget && !sub.contains(e.relatedTarget)) sub.open = false; });
-  }
+    sub.addEventListener('toggle', () => { if (sub.open) subs.forEach(d => { if (d !== sub) d.open = false; }); });
+  });
 
   // Looping avatar clips, the hero wave and the demo's idle avatar: a pause/play button (WCAG 2.2.2), paused from
   // the start under reduced motion. The demo frame hears it as a "pause"/"play" message, again each time it loads.
