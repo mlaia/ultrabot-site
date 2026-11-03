@@ -24,12 +24,21 @@
     sub.addEventListener('focusout', e => { if (e.relatedTarget && !sub.contains(e.relatedTarget)) sub.open = false; });
   }
 
-  // Looping avatar clips and the hero wave: a pause/play button (WCAG 2.2.2), paused from the start under reduced motion.
+  // Looping avatar clips, the hero wave and the demo's idle avatar: a pause/play button (WCAG 2.2.2), paused from
+  // the start under reduced motion. The demo frame hears it as a "pause"/"play" message, again each time it loads.
   const clips = document.querySelectorAll('video[autoplay]');
+  const DEMO = 'https://talk.mlaia.com';
+  const demos = document.querySelectorAll('iframe[src^="' + DEMO + '/"]');
+  const tellDemos = () => {
+    const msg = document.documentElement.classList.contains('ub-paused') ? 'pause' : 'play';
+    demos.forEach(f => { if (f.contentWindow) f.contentWindow.postMessage(msg, DEMO); });
+  };
+  demos.forEach(f => f.addEventListener('load', tellDemos));
   const motion = document.querySelector('.ub-motion');
   const setMotion = paused => {
     document.documentElement.classList.toggle('ub-paused', paused);
     clips.forEach(v => { if (paused) v.pause(); else { const p = v.play(); if (p) p.catch(() => {}); } });
+    tellDemos();
     if (motion) {
       const he = document.documentElement.lang === 'he';
       motion.textContent = paused ? (he ? 'הפעלת האנימציות' : 'Play animations') : (he ? 'עצירת האנימציות' : 'Pause animations');
