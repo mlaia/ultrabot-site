@@ -138,5 +138,6 @@
     if (choice && choice.analytics === true) loadGA();
   }
   document.querySelectorAll('a[href*="talk.mlaia.com"]').forEach(a => a.addEventListener('click', () => track('demo_click', { link_url: a.href })));
+  document.querySelectorAll('a[href*="cal.com/ultrabot"]').forEach(a => a.addEventListener('click', () => track('book_click', { link_url: a.href })));
   document.addEventListener('ub-form-sent', e => track('generate_lead', { topic: e.detail.topic }));
 })();
