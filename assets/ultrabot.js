@@ -105,6 +105,7 @@
     document.head.append(script);
   };
   const track = (name, params) => { if (typeof window.gtag === 'function') window.gtag('event', name, params); };
+  window.ubTrack = track;   // the site chat reports chat_open and chat_message_sent through it (data-track)
   if (GA_ID) {
     const css = document.createElement('style');
     css.textContent = '.ub-consent{position:fixed;inset:auto 16px 16px 16px;max-width:560px;margin-inline-start:auto;z-index:50;background:#0a1628;color:#fff;border-radius:18px;padding:18px 20px;box-shadow:0 12px 40px rgba(0,0,0,.3);font-size:15px;line-height:1.5}.ub-consent a{color:#9cc0ff}.ub-consent-actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}.ub-consent button{font:inherit;border-radius:999px;padding:9px 18px;border:1px solid #fff;background:#fff;color:#0a1628;cursor:pointer}.ub-consent button.secondary{background:transparent;color:#fff}.ub-consent button:focus-visible{outline:3px solid #9cc0ff;outline-offset:2px}.ub-cookie-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}';
@@ -119,9 +120,14 @@
     const choice = saved();
     banner.hidden = !!choice;
     document.body.append(banner);
+    // The site chat's button (talk.mlaia.com/widget.js) rises above the banner while it shows.
+    const lift = () => banner.hidden ? document.body.style.removeProperty('--ultrabot-offset')
+      : document.body.style.setProperty('--ultrabot-offset', (banner.offsetHeight + 32) + 'px');
+    lift();
     const choose = analytics => {
       try { localStorage.setItem(KEY, JSON.stringify({ necessary: true, analytics, timestamp: Date.now() })); } catch {}
       banner.hidden = true;
+      lift();
       if (analytics) loadGA();
     };
     banner.querySelectorAll('[data-consent]').forEach(b => b.addEventListener('click', () => choose(b.dataset.consent === 'yes')));
@@ -132,7 +138,7 @@
       settings.type = 'button';
       settings.className = 'ub-cookie-link';
       settings.textContent = he ? 'הגדרות עוגיות' : 'Cookie settings';
-      settings.addEventListener('click', () => { banner.hidden = false; banner.querySelector('button').focus(); });
+      settings.addEventListener('click', () => { banner.hidden = false; lift(); banner.querySelector('button').focus(); });
       footerLinks.append(' · ', settings);
     }
     if (choice && choice.analytics === true) loadGA();
