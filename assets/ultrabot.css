@@ -333,3 +333,11 @@ html[dir=rtl] input[type=email],html[dir=rtl] a[href^="mailto:"],html[dir=rtl] a
   .ub-article .ub-stats{grid-template-columns:1fr 1fr}
   .ub-article .ub-stat strong{font-size:21px}
 }
+
+/* Callback call demo (voice agents pages): the phone-style demo from talk.mlaia.com/call beside its explanation */
+.ub-call{display:grid;grid-template-columns:1fr minmax(320px,420px);gap:40px;align-items:center}
+.ub-call-frame{border-radius:40px;overflow:hidden;background:#0f1b2e;box-shadow:0 30px 70px #00143d40}
+.ub-call-frame iframe{display:block;width:100%;height:680px;border:0;background:transparent}
+.ub-call ul{margin:0 0 20px;padding-inline-start:20px}
+.ub-call li{margin:6px 0}
+@media (max-width:860px){.ub-call{grid-template-columns:minmax(0,1fr)}.ub-call-frame{max-width:420px;width:100%;margin:0 auto}}
