@@ -351,3 +351,5 @@ html[dir=rtl] input[type=email],html[dir=rtl] a[href^="mailto:"],html[dir=rtl] a
 .ub-cal{min-height:560px;width:100%;overflow:auto}
 .ub-cal-wait{color:var(--ub-quiet)}
 .ub-cal.ready .ub-cal-wait{display:none}
+/* Source line under a research figure. */
+.ub-service .ub-src{font-size:14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--ub-line)}
