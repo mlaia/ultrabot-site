@@ -104,23 +104,27 @@
   const KEY = 'ultrabot-cookie-consent';
   const he = document.documentElement.lang === 'he';
   const saved = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
-  // A page that marks a finished step, such as /booked/ after a Cal.com booking (<body data-event="book_complete">),
-  // reports it once per visit, as soon as analytics may load: at once with saved consent, or when the visitor accepts.
-  // Any query string (a booking redirect may carry the visitor's name or email) is dropped before analytics sees the URL.
+  // Finished steps, such as a booked call, are reported once per visit as soon as analytics may load: at once with
+  // saved consent, or when the visitor accepts. A page can mark one itself (/booked/: <body data-event="book_complete">);
+  // any query string there (a booking redirect may carry the visitor's name or email) is dropped before analytics sees it.
+  const due = new Set();
+  const sendOnce = name => {
+    const once = 'ultrabot-sent-' + name;
+    try { if (sessionStorage.getItem(once)) return; sessionStorage.setItem(once, '1'); } catch {}
+    window.gtag('event', name);
+  };
+  const finished = name => { if (typeof window.gtag === 'function') sendOnce(name); else due.add(name); };
   const pageEvent = document.body.dataset.event;
   if (pageEvent && location.search) history.replaceState(null, '', location.pathname + location.hash);
-  const reportPage = () => {
-    const once = 'ultrabot-sent-' + pageEvent;
-    try { if (sessionStorage.getItem(once)) return; sessionStorage.setItem(once, '1'); } catch {}
-    window.gtag('event', pageEvent);
-  };
+  if (pageEvent) due.add(pageEvent);
   const loadGA = () => {
     if (!GA_ID || window.gtag) return;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
-    if (pageEvent) reportPage();
+    due.forEach(sendOnce);
+    due.clear();
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
@@ -166,6 +170,23 @@
     if (choice && choice.analytics === true) loadGA();
   }
   document.querySelectorAll('a[href*="talk.mlaia.com"]').forEach(a => a.addEventListener('click', () => track('demo_click', { link_url: a.href })));
-  document.querySelectorAll('a[href*="cal.com/ultrabot"]').forEach(a => a.addEventListener('click', () => track('book_click', { link_url: a.href })));
+  document.querySelectorAll('a[href*="cal.com/ultrabot"], a[href$="/book/"]').forEach(a => a.addEventListener('click', () => track('book_click', { link_url: a.href })));
+
+  // Booking page (/book/): Cal.com's calendar inside the page (<div id="ub-cal" data-cal="ultrabot/intro">). A booking made
+  // there is reported as book_complete; nothing about the booking or the visitor is passed on, only that it happened.
+  const cal = document.getElementById('ub-cal');
+  if (cal) {
+    (function (C, A, L) { const p = (a, ar) => a.q.push(ar); const d = C.document; C.Cal = C.Cal || function () { const c = C.Cal, ar = arguments;
+      if (!c.loaded) { c.ns = {}; c.q = c.q || []; d.head.appendChild(d.createElement('script')).src = A; c.loaded = true; }
+      if (ar[0] === L) { const api = function () { p(api, arguments); }, ns = ar[1]; api.q = api.q || [];
+        if (typeof ns === 'string') { c.ns[ns] = c.ns[ns] || api; p(c.ns[ns], ar); p(c, ['initNamespace', ns]); } else p(c, ar); return; }
+      p(c, ar); }; })(window, 'https://app.cal.com/embed/embed.js', 'init');
+    window.Cal('init', 'book', { origin: 'https://app.cal.com' });
+    window.Cal.ns.book('inline', { elementOrSelector: '#ub-cal', calLink: cal.dataset.cal, config: { layout: 'month_view', theme: 'light' } });
+    window.Cal.ns.book('ui', { theme: 'light', hideEventTypeDetails: false, layout: 'month_view' });
+    ['bookingSuccessfulV2', 'bookingSuccessful'].forEach(action =>
+      window.Cal.ns.book('on', { action, callback: () => finished('book_complete') }));
+    window.Cal.ns.book('on', { action: 'linkReady', callback: () => cal.classList.add('ready') });
+  }
   document.addEventListener('ub-form-sent', e => track('generate_lead', { topic: e.detail.topic }));
 })();
