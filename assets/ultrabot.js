@@ -93,12 +93,23 @@
   const KEY = 'ultrabot-cookie-consent';
   const he = document.documentElement.lang === 'he';
   const saved = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
+  // A page that marks a finished step, such as /booked/ after a Cal.com booking (<body data-event="book_complete">),
+  // reports it once per visit, as soon as analytics may load: at once with saved consent, or when the visitor accepts.
+  // Any query string (a booking redirect may carry the visitor's name or email) is dropped before analytics sees the URL.
+  const pageEvent = document.body.dataset.event;
+  if (pageEvent && location.search) history.replaceState(null, '', location.pathname + location.hash);
+  const reportPage = () => {
+    const once = 'ultrabot-sent-' + pageEvent;
+    try { if (sessionStorage.getItem(once)) return; sessionStorage.setItem(once, '1'); } catch {}
+    window.gtag('event', pageEvent);
+  };
   const loadGA = () => {
     if (!GA_ID || window.gtag) return;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
+    if (pageEvent) reportPage();
     const script = document.createElement('script');
     script.async = true;
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;

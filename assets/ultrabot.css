@@ -204,6 +204,7 @@ html.ub-paused .ub-wave i{animation-play-state:paused}
 .ub-404 p{font-size:20px;margin:0 0 28px}
 .ub-404 .ub-actions{justify-content:center}
 .ub-404 .ub-btn.ghost{color:#fff}
+.ub-done h1{font-size:clamp(44px,7vw,88px)}
 
 /* Article pages (/insights/<slug>/): wrap the post in <article class="ub-article"> inside <main>. */
 .ub-article{width:min(760px,calc(100% - 40px));margin:0 auto;padding:64px 0 88px;font-size:18px;line-height:1.75}
