@@ -66,6 +66,12 @@
   // Contact form: submit to Formspree without leaving the page. Without JS it posts normally.
   const form = document.querySelector('.ub-form');
   if (form) {
+    // A button that leads to the form for one offer (data-topic, e.g. WhatsApp early access) labels the inquiry.
+    document.querySelectorAll('a[href="#contact"][data-topic]').forEach(a => a.addEventListener('click', () => {
+      const topic = form.querySelector('[name=topic]'), subject = form.querySelector('[name=_subject]');
+      if (topic) topic.value = a.dataset.topic;
+      if (subject) subject.value = 'Ultrabot inquiry (' + a.dataset.topic + ')';
+    }));
     form.addEventListener('submit', async e => {
       e.preventDefault();
       const status = form.querySelector('.ub-form-status');
