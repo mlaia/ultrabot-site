@@ -342,3 +342,8 @@ html[dir=rtl] input[type=email],html[dir=rtl] a[href^="mailto:"],html[dir=rtl] a
 .ub-call ul{margin:0 0 20px;padding-inline-start:20px}
 .ub-call li{margin:6px 0}
 @media (max-width:860px){.ub-call{grid-template-columns:minmax(0,1fr)}.ub-call-frame{max-width:420px;width:100%;margin:0 auto}}
+/* Seasonal offer strip under a page hero; ultrabot.js hides it after its data-until date. */
+.ub-offer{background:var(--ub-pale);border-bottom:1px solid var(--ub-line);padding:20px 0}
+.ub-offer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ub-offer p{margin:0;font-size:18px;max-width:820px}
+.ub-offer .ub-offer-small{font-size:15px;color:var(--ub-quiet);margin-top:6px}

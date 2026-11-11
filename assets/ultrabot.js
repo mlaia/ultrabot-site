@@ -63,6 +63,11 @@
     });
   }
 
+  // A seasonal offer (class ub-offer, data-until="YYYY-MM-DD") disappears after its last day, Israel winter time.
+  document.querySelectorAll('.ub-offer[data-until]').forEach(o => {
+    if (Date.now() > new Date(o.dataset.until + 'T23:59:59+02:00').getTime()) o.hidden = true;
+  });
+
   // Contact form: submit to Formspree without leaving the page. Without JS it posts normally.
   const form = document.querySelector('.ub-form');
   if (form) {
