@@ -1,4 +1,4 @@
-/* Ultrabot: mobile menu, Solutions and Platforms submenus, contact form and the home "ask" box. No analytics. */
+/* Ultrabot: mobile menu, Solutions and Platforms submenus, contact form, the home "ask" box, and GA4 with Consent Mode v2. */
 (() => {
   'use strict';
   const menu = document.querySelector('.ub-menu');
@@ -99,7 +99,9 @@
     });
   }
 
-  // Analytics: GA4 loads only after the visitor accepts. Until GA_ID is set, no banner and no tracking.
+  // Analytics: Google Consent Mode v2 (advanced). GA4 loads on every page with every storage signal denied, so it sends
+  // only cookieless pings; accepting the banner grants analytics_storage alone (no ad signals). Until GA_ID is set,
+  // no banner and no tracking.
   const GA_ID = 'G-HGBCSH2PBP'; // Ultrabot GA4 property (account 414249928, property 561722932)
   const KEY = 'ultrabot-cookie-consent';
   const he = document.documentElement.lang === 'he';
@@ -117,10 +119,14 @@
   const pageEvent = document.body.dataset.event;
   if (pageEvent && location.search) history.replaceState(null, '', location.pathname + location.hash);
   if (pageEvent) due.add(pageEvent);
+  const consent = granted => ({ analytics_storage: granted ? 'granted' : 'denied' });
   const loadGA = () => {
     if (!GA_ID || window.gtag) return;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+    const prior = saved();
+    if (prior && prior.analytics === true) window.gtag('consent', 'update', consent(true));
     window.gtag('js', new Date());
     window.gtag('config', GA_ID);
     due.forEach(sendOnce);
@@ -154,7 +160,7 @@
       try { localStorage.setItem(KEY, JSON.stringify({ necessary: true, analytics, timestamp: Date.now() })); } catch {}
       banner.hidden = true;
       lift();
-      if (analytics) loadGA();
+      if (typeof window.gtag === 'function') window.gtag('consent', 'update', consent(analytics));
     };
     banner.querySelectorAll('[data-consent]').forEach(b => b.addEventListener('click', () => choose(b.dataset.consent === 'yes')));
     banner.addEventListener('keydown', e => { if (e.key === 'Escape') choose(false); });
@@ -167,8 +173,16 @@
       settings.addEventListener('click', () => { banner.hidden = false; lift(); banner.querySelector('button').focus(); });
       footerLinks.append(' · ', settings);
     }
-    if (choice && choice.analytics === true) loadGA();
+    loadGA();
   }
+  // Contact actions: WhatsApp, phone and email links, wherever they are on the page (also ones added later).
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    const h = a.getAttribute('href');
+    const method = /^https?:\/\/(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com)\//i.test(h) ? 'whatsapp' : /^tel:/i.test(h) ? 'phone' : /^mailto:/i.test(h) ? 'email' : '';
+    if (method) track('contact_click', { method });
+  });
   document.querySelectorAll('a[href*="talk.mlaia.com"]').forEach(a => a.addEventListener('click', () => track('demo_click', { link_url: a.href })));
   document.querySelectorAll('a[href*="cal.com/ultrabot"], a[href$="/book/"]').forEach(a => a.addEventListener('click', () => track('book_click', { link_url: a.href })));
 
