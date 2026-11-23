@@ -100,10 +100,12 @@
   }
 
   // Analytics: Google Consent Mode v2 (advanced). GA4 loads on every page with every storage signal denied, so it sends
-  // only cookieless pings; accepting the banner grants analytics_storage alone (no ad signals). Until GA_ID is set,
-  // no banner and no tracking.
+  // only cookieless pings. Accepting the banner grants analytics_storage, ad_storage and ad_user_data, so Google Ads
+  // can attribute a lead to the ad click it came from; ad_personalization stays denied always (no remarketing, no
+  // personalised ads). Declining keeps all four denied. Until GA_ID is set, no banner and no tracking.
   const GA_ID = 'G-HGBCSH2PBP'; // Ultrabot GA4 property (account 414249928, property 561722932)
-  const KEY = 'ultrabot-cookie-consent';
+  // v2 since ad measurement joined analytics: a yes given to the old banner covered analytics only, so it is asked again.
+  const KEY = 'ultrabot-cookie-consent-v2';
   const he = document.documentElement.lang === 'he';
   const saved = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } };
   // Finished steps, such as a booked call, are reported once per visit as soon as analytics may load: at once with
@@ -119,7 +121,10 @@
   const pageEvent = document.body.dataset.event;
   if (pageEvent && location.search) history.replaceState(null, '', location.pathname + location.hash);
   if (pageEvent) due.add(pageEvent);
-  const consent = granted => ({ analytics_storage: granted ? 'granted' : 'denied' });
+  const consent = granted => {
+    const g = granted ? 'granted' : 'denied';
+    return { analytics_storage: g, ad_storage: g, ad_user_data: g, ad_personalization: 'denied' };
+  };
   const loadGA = () => {
     if (!GA_ID || window.gtag) return;
     window.dataLayer = window.dataLayer || [];
@@ -147,8 +152,8 @@
     banner.setAttribute('role', 'region');
     banner.setAttribute('aria-label', he ? 'העדפות עוגיות' : 'Cookie preferences');
     banner.innerHTML = he
-      ? '<p>אנליטיקה אופציונלית עוזרת לנו להבין איך משתמשים באתר. אפשר לסרב ולהמשיך להשתמש בכל האתר. <a href="https://www.mlaia.com/privacy.html">מדיניות הפרטיות</a></p><div class="ub-consent-actions"><button type="button" data-consent="yes">אישור אנליטיקה</button><button type="button" class="secondary" data-consent="no">סירוב</button></div>'
-      : '<p>Optional analytics help us understand how the website is used. You can decline and still use every feature. <a href="https://www.mlaia.com/privacy.html">Privacy Policy</a></p><div class="ub-consent-actions"><button type="button" data-consent="yes">Accept analytics</button><button type="button" class="secondary" data-consent="no">Decline</button></div>';
+      ? '<p>עוגיות אופציונליות עוזרות לנו להבין איך משתמשים באתר ולמדוד את המודעות שלנו בגוגל. בלי פרסום מותאם אישית. אפשר לסרב ולהמשיך להשתמש בכל האתר. <a href="https://www.mlaia.com/privacy.html">מדיניות הפרטיות</a></p><div class="ub-consent-actions"><button type="button" data-consent="yes">אישור</button><button type="button" class="secondary" data-consent="no">סירוב</button></div>'
+      : '<p>Optional cookies help us understand how the site is used and measure our Google ads. No personalised ads. You can decline and still use every feature. <a href="https://www.mlaia.com/privacy.html">Privacy Policy</a></p><div class="ub-consent-actions"><button type="button" data-consent="yes">Accept</button><button type="button" class="secondary" data-consent="no">Decline</button></div>';
     const choice = saved();
     banner.hidden = !!choice;
     document.body.append(banner);
@@ -157,7 +162,7 @@
       : document.body.style.setProperty('--ultrabot-offset', (banner.offsetHeight + 32) + 'px');
     lift();
     const choose = analytics => {
-      try { localStorage.setItem(KEY, JSON.stringify({ necessary: true, analytics, timestamp: Date.now() })); } catch {}
+      try { localStorage.setItem(KEY, JSON.stringify({ necessary: true, analytics, ads: analytics, timestamp: Date.now() })); } catch {}
       banner.hidden = true;
       lift();
       if (typeof window.gtag === 'function') window.gtag('consent', 'update', consent(analytics));
