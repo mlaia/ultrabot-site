@@ -130,10 +130,16 @@
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+    // While ad_storage is denied, ad click IDs are redacted from the cookieless pings: Google Ads gets nothing before consent.
+    window.gtag('set', 'ads_data_redaction', true);
     const prior = saved();
     if (prior && prior.analytics === true) window.gtag('consent', 'update', consent(true));
     window.gtag('js', new Date());
-    window.gtag('config', GA_ID);
+    // Until the visitor accepts, the page address sent to analytics carries no ad click ID (gclid, gbraid, wbraid,
+    // dclid): ads_data_redaction covers Google's ad tags, not GA4's page_location. The ID stays in the address bar,
+    // so it is still kept (_gcl_aw) once the visitor accepts.
+    const clean = () => { const u = new URL(location.href); ['gclid', 'gbraid', 'wbraid', 'dclid'].forEach(k => u.searchParams.delete(k)); return u.href; };
+    window.gtag('config', GA_ID, prior && prior.analytics === true ? {} : { page_location: clean() });
     due.forEach(sendOnce);
     due.clear();
     const script = document.createElement('script');
