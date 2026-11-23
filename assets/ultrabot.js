@@ -111,11 +111,16 @@
   // Finished steps, such as a booked call, are reported once per visit as soon as analytics may load: at once with
   // saved consent, or when the visitor accepts. A page can mark one itself (/booked/: <body data-event="book_complete">);
   // any query string there (a booking redirect may carry the visitor's name or email) is dropped before analytics sees it.
+  // Set when the visitor accepts on a page reached from an ad: page_location was sent without the click ID, and a
+  // second config call does not change it, so each later event carries the full address and the session keeps its
+  // ad attribution. A return visit with saved consent sends the full address from the start.
+  let fullLocation = false;
+  const withLocation = (params = {}) => fullLocation ? { ...params, page_location: location.href } : params;
   const due = new Set();
   const sendOnce = name => {
     const once = 'ultrabot-sent-' + name;
     try { if (sessionStorage.getItem(once)) return; sessionStorage.setItem(once, '1'); } catch {}
-    window.gtag('event', name);
+    window.gtag('event', name, withLocation());
   };
   const finished = name => { if (typeof window.gtag === 'function') sendOnce(name); else due.add(name); };
   const pageEvent = document.body.dataset.event;
@@ -147,7 +152,7 @@
     script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
     document.head.append(script);
   };
-  const track = (name, params) => { if (typeof window.gtag === 'function') window.gtag('event', name, params); };
+  const track = (name, params) => { if (typeof window.gtag === 'function') window.gtag('event', name, withLocation(params)); };
   window.ubTrack = track;   // the site chat reports chat_open and chat_message_sent through it (data-track)
   if (GA_ID) {
     const css = document.createElement('style');
@@ -171,7 +176,11 @@
       try { localStorage.setItem(KEY, JSON.stringify({ necessary: true, analytics, ads: analytics, timestamp: Date.now() })); } catch {}
       banner.hidden = true;
       lift();
-      if (typeof window.gtag === 'function') window.gtag('consent', 'update', consent(analytics));
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', consent(analytics));
+        // Accepted on a page reached from an ad: later events carry the full address again (see withLocation).
+        if (analytics && /[?&](gclid|gbraid|wbraid|dclid)=/.test(location.search)) fullLocation = true;
+      }
     };
     banner.querySelectorAll('[data-consent]').forEach(b => b.addEventListener('click', () => choose(b.dataset.consent === 'yes')));
     banner.addEventListener('keydown', e => { if (e.key === 'Escape') choose(false); });
