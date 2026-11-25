@@ -24,6 +24,7 @@
 - [Hebrew: צ'אט בוט וסוכן קולי AI לעסקים](https://ultrabot.ai/he/)
 - [Hebrew: צ'אט בוט לאתר](https://ultrabot.ai/he/chatbots/), [עוזר ידע ארגוני](https://ultrabot.ai/he/knowledge-assistant/) and [עוזר AI באפליקציה](https://ultrabot.ai/he/in-app-assistants/)
 - [Hebrew: בוט וואטסאפ לעסק](https://ultrabot.ai/he/whatsapp-bot/): a WhatsApp add-on to the website assistant, in early access (Hebrew page only): answers from the business's own site and documents and hands the chat to a person
+- [Hebrew: כמה עולה צ'אט בוט לעסק](https://ultrabot.ai/he/chatbot-cost/): what drives the cost of a business chatbot (scope, content, integrations, channels, volume); no price list, quotes are per request (Hebrew page only)
 - [Hebrew: סוכנים קוליים](https://ultrabot.ai/he/voice-agents/) and [אווטארים מדברים](https://ultrabot.ai/he/avatars/)
 
 ## Insights
